@@ -6,9 +6,9 @@ TMPDIR=/tmp
 DATESTR=`date +'%Y%m%d'`
 SRCPKG=$TMPDIR/mfs_src-$DATESTR.tar.bz2
 NOARCHPKG=$TMPDIR/mfs_noarch-$DATESTR.tar.bz2
-MIPSPKG=$TMPDIR/mfs_mips-$DATESTR.tar.bz2
-PPCPKG=$TMPDIR/mfs_ppc-$DATESTR.tar.bz2
-I386PKG=$TMPDIR/mfs_i386-$DATESTR.tar.bz2
+MIPSPKG=$TMPDIR/mfs_bin.mips-$DATESTR.tar.bz2
+PPCPKG=$TMPDIR/mfs_bin.ppc-$DATESTR.tar.bz2
+I386PKG=$TMPDIR/mfs_bin.i386-$DATESTR.tar.bz2
 
 make clean
 (cd ..; tar czvf $SRCPKG mfs_vplay_tserver)
