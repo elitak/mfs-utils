@@ -60,7 +60,7 @@ while( my ($n,$i) = each %attr_idx) {
 }
 
 for(my $i=0; $i<scalar(@attr_names); $i++) {
-  printf "static const char attrname_${i}[] = \"$attr_names[$i]\";\n"
+  printf("static const char attrname_%d[] = \"$attr_names[$i]\";\n",$i)
     if (defined($attr_names[$i]));
 }
 
@@ -69,7 +69,7 @@ for(my $i=0; $i<scalar(@attr_names); $i++) {
 #
 for(my $i=0; $i<scalar(@attrs); $i++) {
   next if (!defined($attrs[$i]));
-  printf "static attr_t sattrs_${i}[] = {\n";
+  printf("static attr_t sattrs_%d[] = {\n",$i);
   my @a = @{$attrs[$i]};
   for(my $j=0; $j<scalar(@a); $j++) {
     if (!defined($a[$j])) {

@@ -19,14 +19,16 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <asm/unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <sys/time.h>
 
+#include "compat.h"
+
 #ifdef TIVO_S1
 #include <linux/ide-tivo.h>
+#include <asm/unistd.h>
 #endif /* TIVO_S1 */
 
 #define MAX_ZONES 32
@@ -85,7 +87,7 @@
 #define VSERVER_PORT 8074
 
 typedef unsigned u32;
-typedef loff_t u64;
+typedef u_int64_t u64;
 typedef unsigned short u16;
 typedef unsigned char u8;
 

@@ -7,9 +7,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
-#include <alloca.h>
 #include <fcntl.h>
-#include <libgen.h>
 #include <assert.h>
 #include <sys/types.h>
 #include <sys/wait.h>

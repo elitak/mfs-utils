@@ -51,7 +51,7 @@ void *query_part(int fsid, int subobj, const char *name, int *len)
 
 /* query a subobject path starting at fsid returning the data in the
    tail of the path */
-int query_subobj_path(int fsid, int subobj, const char *path, int *len, 
+static int query_subobj_path(int fsid, int subobj, const char *path, int *len, 
 		       void *ret[], const int max)
 {
 	int i=0;
@@ -150,4 +150,3 @@ void query_streams(const char *path)
 	}
 	if (dir) mfs_dir_free(dir);
 }
-

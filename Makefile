@@ -1,45 +1,53 @@
-MYARCH := $(shell uname -m)
-ARCH = $(MYARCH)
+MYARCH := $(shell uname -ms | tr ' ' -)
 DEBUG=0
 STATIC=0
 USE_TRIDGE_MFS_SO=0
 
-CFLAGS = -Wall
+CFLAGS = -Wall -I. -I/sw/include -I/sw/include/gnugetopt
 CCLDFLAGS =
-PREFIX =
 
+IS_TIVO := $(shell grep -qsE 'Teleworld|TiVo' /proc/cpuinfo && echo 1 || echo 0)
+ifneq ($(IS_TIVO),0)
+MYARCH = $(shell uname -m)
+endif
+ARCH := $(MYARCH)
 ifeq ($(ARCH),ppc)
 # ARCH is ppc
-PREFIX=powerpc-TiVo-linux
+PREFIX=powerpc-TiVo-linux-
 CFLAGS += -DTIVO -DTIVO_S1
+EXTRABINS = contrib/s1_unscramble
 else
-# ARCH is mips or i386 (assuming kernel/glibc largefile support on i386)
-CFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
+# ARCH is mips or native (assuming kernel/glibc largefile support on 
+CFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE 
 ifeq ($(ARCH),mips)
 # ARCH is mips
-PREFIX=mips-TiVo-linux
-CFLAGS += -mips2 -DTIVO -DTIVO_S2
+PREFIX=mips-TiVo-linux-
+CFLAGS += -mips2 -DTIVO -DTIVO_S2 
 #CCLDFLAGS += -static
 else
-# ARCH is i386
-ARCH = i386
-MYARCH = $(ARCH)
-HOSTBINS = vplayer sd-h400_unlock vsplit
+# host ARCH, not cross compiling
+EXTRABINS = vplayer sd-h400_unlock vsplit
+ifeq ($(ARCH),Darwin-Power-Macintosh)
+CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
+else
+CFLAGS += -DNEED_ALLOCA_H
+endif
 endif
 endif
 
-
-ifneq ($(ARCH),$(MYARCH))
-CC = $(PREFIX)-gcc
-AR = $(PREFIX)-ar
+ifneq ($(IS_TIVO),0)
+PREFIX = 
 endif
+
+CC = $(PREFIX)gcc
+AR = $(PREFIX)ar
 
 ifeq ($(DEBUG),1)
 CFLAGS += -O0 -ggdb
 LIBS += -lefence -lpthread
 else
 CFLAGS += -O3
-CCLDFLAGS += -Wl,--strip-all
+CCLDFLAGS += -Wl,-s
 endif
 
 ifeq ($(STATIC),1)
@@ -62,7 +70,7 @@ BINS = \
  mfs_info mfs_ls mfs_streams mfs_dumpobj mfs_dumpschema mfs_tzoffset \
  mfs_import mfs_uberexport                              \
  mfs_export mfs_stream mfs_tarstream mfs_tmfstream      \
- tserver vserver NowShowing                             \
+ tserver vserver NowShowing ciphercheck                 \
  vplay                                                  \
  mfs_dump mfs_poke                                      \
  mfs_bitmap mfs_purge mfs_getslice mfs_findzero
@@ -77,10 +85,10 @@ all: proto.h mkdirs binaries
 clean:
 	rm -rf obj.* bin.* proto.h preload_schema.h *~
 
-binaries: $(BINS:%=$(BINDIR)/%)  $(HOSTBINS:%=$(BINDIR)/%) 
+binaries: $(BINS:%=$(BINDIR)/%)  $(EXTRABINS:%=$(BINDIR)/%) 
 
 mkdirs:
-	mkdir -p $(OBJDIR) $(BINDIR)
+	mkdir -p $(OBJDIR) $(BINDIR) $(OBJDIR)/contrib $(BINDIR)/contrib
 
 tags:
 	etags *.[ch]
@@ -109,9 +117,9 @@ $(BINDIR)/libtridgemfs.so.1.0: $(COMMON:%.c=$(OBJDIR)/%.o) $(SCHEMA:%.c=$(OBJDIR
 	$(CC) -shared $(CCLDFLAGS) -Wl,-soname,libtridgemfs.so.1 -o $@ $^
 
 $(OBJDIR)/libtridgemfs.a: $(COMMON:%.c=$(OBJDIR)/%.o) $(SCHEMA:%.c=$(OBJDIR)/%.o)
-	$(AR) rc  $@ $^
+	$(AR) -rc  $@ $^ ; $(PREFIX)ranlib $@
 
 schema.c: preload_schema.h
 
-preload_schema.h: schema-5.4.txt
+preload_schema.h: schema-7.1a-02.txt
 	perl make-preload-schema.pl <$< >$@

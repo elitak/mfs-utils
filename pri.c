@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #ifdef TIVO_S1
-#include <asm/unistd.h>
+//#include <asm/unistd.h>
 /*
 _syscall3(int, sched_setscheduler, pid_t, pid, int, policy, struct sched_param, *param);
 

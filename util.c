@@ -8,6 +8,10 @@
 #include <netinet/tcp.h>
 #include <unistd.h>
 
+#ifdef TIVO_S1
+#include <asm/unistd.h>
+#endif /* TIVO_S1 */
+
 #ifdef TIVO_S2
 #include <linux/tivo-tagio.h>
 #include <linux/tivo-scramble.h>
@@ -148,7 +152,7 @@ u32 read_sectors(int fd, void *buf, u32 sector, u32 count)
 	req.num_sectors = count;
 	req.deadline = 0;
 	
-	return syscall(__NR_readsectors, fd, &vec, 1, &req);
+	return syscall(__NR_readsectors, fd, &vec, 1, &req, scramble_present);
 #elif TIVO_S2
 	tivotag tagtuple[TIVOTAGIO_NUMTAGS];
 	struct FsIovec vec;

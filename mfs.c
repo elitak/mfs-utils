@@ -59,7 +59,7 @@ void dump_sectors(void *d, int n)
 
 
 /* load the mfs super block - assumes MFS_DEVICE is set */
-static void load_super(void)
+static void load_super(int fix)
 {
 	char buffer[SECTOR_SIZE];
 	char *xlist[16] = {0};		/* really only need two: A and B drive substitutions */
@@ -160,8 +160,12 @@ static void load_super(void)
 	{
 		fprintf(stderr, "Warning: filesystem is inconsistent. Run fsfix and mfscheck ASAP\n");
 	}
-
-	check_crc((void *)&super, sizeof(super), &super.crc);
+	if (!fix) {
+		check_crc((void *)&super, sizeof(super), &super.crc);
+	} else if (replace_crc((void *)&super, sizeof(super), &super.crc)) {
+		fprintf( stderr, "Replacing back CRC\n");
+		mfs_write_partial(&super, 0, sizeof(super));
+	}
 	byte_swap(&super, "i9 b128 i17");
 
 	if ((super.magic != 0xabbafeed) && (super.magic != 0x37353033)) {
@@ -301,17 +305,24 @@ void mfs_store_inode(int fsid, struct mfs_inode *inode)
 }
 
 /* must call this before anything else */
-void mfs_init_dev(char *dev)
+void mfs_init_dev_fix(char *dev, int fix)
 {
 	char *p = (dev != 0) ? dev : getenv("MFS_DEVLIST");
 	if (p) add_dev_map(p);
-	load_super();
+	load_super(fix);
 	load_zones();
 }
-
-void mfs_init(void) 
+void mfs_init_dev(char *dev) 
 {
-	mfs_init_dev(0);
+	mfs_init_dev_fix(dev,0);
+}
+void mfs_init_fix(int fix)
+{
+	mfs_init_dev_fix(0,fix);
+}
+void mfs_init() 
+{
+	mfs_init_dev_fix(0,0);
 }
 
 /* dump some global info on the mfs */
@@ -741,11 +752,11 @@ void mfs_all_inodes(void (*fn)(struct mfs_inode *))
 				byte_swap(&inode.u.runs[0], "i48");
 			}
 			if (inode.id != 0) {
-				if (inode.id > super.next_fsid) {
-					fprintf(stderr, "invalid fsid %d (next=%d)\n",
-					       inode.id, super.next_fsid);
-					exit(1);
-				}
+			  //				if (inode.id > super.next_fsid) {
+			  //					fprintf(stderr, "invalid fsid %d (next=%d)\n",
+			  //					       inode.id, super.next_fsid);
+			  //					exit(1);
+			  //				}
 				fn(&inode);
 			}
 		}
@@ -761,13 +772,13 @@ struct bitmap *mfs_zone_bitmap(int zone, u64 limit)
 
 	void bitmap_fn(struct mfs_inode *inode) {
 		int i;
-		//fprintf(stderr, "inode %d runs=%d\n", inode->id, inode->num_runs);
+		fprintf(stderr, "inode %d runs=%d\n", inode->id, inode->num_runs);
 		if (limit && mfs_fsid_size(inode->id) > limit) {
 			fprintf(stderr, "skipping inode %d of size=%lld\n", 
 			       inode->id, mfs_fsid_size(inode->id));
 			return;
 		}
-		// if (bitmap_excluded(inode->id)) return;
+		//if (bitmap_excluded(inode->id)) return;
 		for (i=0;i<inode->num_runs;i++) {
 			u32 start, len;
 			start = inode->u.runs[i].start;

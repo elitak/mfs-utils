@@ -18,7 +18,7 @@
 static int readahead_enabled;
 static int vserver = -1;
 static int need_bswap;
-static int verbose;
+static int verbose = 0;
 static u32 total_size;
 static char *dev_list;
 extern char *mfs_dev;
@@ -149,7 +149,7 @@ static unsigned count_devs; /*JPB*/
 void mfs_read_sectors(void *buf, u32 sec, u32 count)
 {
 	int i;
-	loff_t start=0;
+	u64 start=0;
 	
 	if (vserver != -1) {
 		vserver_read_sectors(buf, sec, count);
@@ -185,7 +185,7 @@ void mfs_read_sectors(void *buf, u32 sec, u32 count)
 void mfs_write_sectors(void *buf, u32 sec, u32 count)
 {
 	int i;
-	loff_t start=0;
+	u64 start=0;
 	
 	if (vserver != -1) {
 		vserver_write_sectors(buf, sec, count);

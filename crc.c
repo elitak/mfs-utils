@@ -130,6 +130,20 @@ int check_crc(void *buf, int length, u32 *crc)
 	return new == crc_saved ? 1 : 0;
 }
 
+int replace_crc(void *buf, int length, u32 *crc)
+{
+	u32 crc_saved = ntohl(*crc);
+	u32 new;
+
+	*crc = htonl(MFS_CRC_BASE);
+	new = crc32(buf, length);
+	if (new != crc_saved) {
+		fprintf(stderr, "crc mismatch len=%d 0x%08x 0x%08x\n", length, crc_saved, new);
+	}
+	*crc = htonl(new);
+	return new == crc_saved ? 1 : 0;
+}
+
 void auto_crc(void *buf, int max_length, u32 *crc)
 {
 	u32 crc_saved = ntohl(*crc);

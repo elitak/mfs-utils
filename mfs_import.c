@@ -28,6 +28,7 @@ static inline ssize_t readall( int fd, void *buf, size_t count )
 	ssize_t rc = 0;
 	ssize_t ret = 0;
 	
+#ifdef MSG_WAITALL
 	// Use recv on a socket to avoid reading in small MTU sized chunks
 	// MSG_WAITALL will return the whole thing in one recv call.
 	if (use_recv) {
@@ -43,7 +44,9 @@ static inline ssize_t readall( int fd, void *buf, size_t count )
 			rc += ret;
 		}
 	}
-	if (!use_recv) {
+	if (!use_recv) 
+#endif
+	{
 		// 
 		// non socket case.
 		//
