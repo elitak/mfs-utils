@@ -211,6 +211,7 @@ generate_1_NowShowing(int fsid, char *ret, unsigned retsize)
 
 	get_object( -1, 0, 0, fsid, &buf, &size );
 	generate_NowShowing_internal(fsid, buf, size, ret, retsize );
+	free(buf);
 	return 1;
 }
 

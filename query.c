@@ -11,14 +11,14 @@ static struct {
 	int fsid;
 	void *buf;
 	int size;
-} loaded;
+} loaded = {0};
 
 static void load_object(int fsid)
 {
 	if (fsid == loaded.fsid) return;
 
 	if (loaded.buf) free(loaded.buf);
-
+	loaded.fsid = fsid;
 	loaded.size = mfs_fsid_size(fsid);
 	loaded.buf = malloc(loaded.size);
 	mfs_fsid_pread(fsid, loaded.buf, 0, loaded.size);

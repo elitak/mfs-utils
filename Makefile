@@ -44,7 +44,7 @@ AR = $(PREFIX)ar
 
 ifeq ($(DEBUG),1)
 CFLAGS += -O0 -ggdb
-LIBS += -lefence -lpthread
+#LIBS += -lefence -lpthread
 else
 CFLAGS += -O3
 CCLDFLAGS += -Wl,-s
