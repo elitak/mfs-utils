@@ -75,7 +75,7 @@ BINDIR = bin.$(ARCH)
 all: proto.h mkdirs binaries
 
 clean:
-	rm -rf obj.* bin.* proto.h preload_schema.h
+	rm -rf obj.* bin.* proto.h preload_schema.h *~
 
 binaries: $(BINS:%=$(BINDIR)/%)  $(HOSTBINS:%=$(BINDIR)/%) 
 

@@ -5,3 +5,5 @@ Jamie   Add internal NowShowing generation to tserver, and include an embedded
 	DeleteShowing script.
 	
 Jamie	Put into a CVS repository
+
+Jamie	add mkpkg.sh for building distribution packages
