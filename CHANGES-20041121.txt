@@ -1,0 +1,25 @@
+w_cb	schema-5.4.txt
+
+w_cb	Support readonly access to an MFS in an inconsistent state.
+
+JBeuhl  Export expiration date in mfs_tmfstream; patch to mfs_ftp to
+        use it (mfs_ftp.jbuehl.patch).
+
+Jamie	Makefile options for static builds, and to use a library .so
+	for common code.
+
+	Merge mfs_export, mfs_stream, mfs_tarexport, mfs_tmfexport into
+        a new program, mfs_uberexport, and add cover scripts to
+        emulate old cmdlines.
+
+	Support ty+ in mfs_uberexport  (-Rx <path|fsid>)
+
+	Patch to mfs_ftp to use mfs_uberexport and mfs_import
+	(mfs_ftp.jamie.patch).
+
+JBeuhl  Enhancements to the MFS_DEVICE envvar handling to support
+        multidisk configurations with interleaved layouts for PC side
+        extraction.  This can occur if a B drive is added followed by 
+	an A drive expansion. The previous multidisk code from JonBig
+	didn't handle these cases.   See README.MFS_DEVICE for details.
+

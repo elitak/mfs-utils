@@ -1,0 +1,169 @@
+<Title>:<The Fairly OddParents><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<NIK><EpisodeTitle>:<Knighty Knight; Mighty Mom and Dyno Dad><FSID>:<186855/11><TyStream>:</198010/198012><TotalSize>:<620>
+<Title>:<The Fairly OddParents><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<NIK><EpisodeTitle>:<Cosmo Con; Wanda's Day Off><FSID>:<186854/11><TyStream>:</197996/197997><TotalSize>:<619>
+<Title>:<Lilo & Stitch><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<DISNP><EpisodeTitle>:<Shoe><FSID>:<186827/11><TyStream>:</197994/197995><TotalSize>:<618>
+<Title>:<Baby Looney Tunes><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<TOONP><EpisodeTitle>:<Flower Power; Lightning Bugs Sylvester><FSID>:<186815/11><TyStream>:</197948/197955><TotalSize>:<620>
+<Title>:<Baby Looney Tunes><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<TOONP><EpisodeTitle>:<Bruce Bunny; Leader of the Pack><FSID>:<186814/11><TyStream>:</197945/197947><TotalSize>:<620>
+<Title>:<Tom & Jerry><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<TOONP><EpisodeTitle>:<><FSID>:<186821/11><TyStream>:</197942/197943/197944><TotalSize>:<1236>
+<Title>:<Comedy Central Presents><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<186775/11><TyStream>:</197932/197933><TotalSize>:<618>
+<Title>:<Comedy Central Presents><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<186774/11><TyStream>:</197930/197931><TotalSize>:<619>
+<Title>:<Baby Looney Tunes><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<TOONP><EpisodeTitle>:<Shadow of a Doubt; Christmas in July><FSID>:<186813/11><TyStream>:</197927/197929><TotalSize>:<620>
+<Title>:<Baby Looney Tunes><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<TOONP><EpisodeTitle>:<Spinout; Snow Day><FSID>:<186812/11><TyStream>:</197924/197926><TotalSize>:<620>
+<Title>:<The Fairly OddParents><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<NIK><EpisodeTitle>:<Shelf Life><FSID>:<186853/11><TyStream>:</197870/197872><TotalSize>:<619>
+<Title>:<The Magic School Bus><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<TLC><EpisodeTitle>:<The Magic School Bus for Lunch><FSID>:<186876/11><TyStream>:</197867/197869><TotalSize>:<620>
+<Title>:<The Tonight Show With Jay Leno><Day>:<Fri><Date>:<12/10><Year>:<12/10/04><Station>:<KOB><EpisodeTitle>:<><FSID>:<186870/11><TyStream>:</197853/197859/197860><TotalSize>:<1216>
+<Title>:<The Tonight Show With Jay Leno><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<KOB><EpisodeTitle>:<><FSID>:<186869/11><TyStream>:</197693/197695/197696><TotalSize>:<1280>
+<Title>:<Totally Spies><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<TOONP><EpisodeTitle>:<Totally Switched><FSID>:<186765/11><TyStream>:</196719/196720><TotalSize>:<620>
+<Title>:<The Fairly OddParents><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<NIK><EpisodeTitle>:<Shiny Teeth; Odd, Odd West><FSID>:<186852/11><TyStream>:</196717/196718><TotalSize>:<618>
+<Title>:<Lilo & Stitch><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<DISNP><EpisodeTitle>:<Phantasmo><FSID>:<186836/11><TyStream>:</196715/196716><TotalSize>:<618>
+<Title>:<Baby Looney Tunes><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<TOONP><EpisodeTitle>:<Takers Keepers; To Tell the Tooth><FSID>:<186811/11><TyStream>:</196688/196689><TotalSize>:<619>
+<Title>:<Comedy Central Presents><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<186773/11><TyStream>:</196659/196660><TotalSize>:<618>
+<Title>:<What's New Scooby-Doo?><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<TOONP><EpisodeTitle>:<It's Mean, It's Green, It's the Mystery Machine><FSID>:<195310/11><TyStream>:</196656><TotalSize>:<371>
+<Title>:<The Fairly OddParents><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<NIK><EpisodeTitle>:<Engine Blocked; Mighty Mom and Dyno Dad Meet the Crimson Chin><FSID>:<186851/11><TyStream>:</196587/196588><TotalSize>:<619>
+<Title>:<The Magic School Bus><Day>:<Thu><Date>:<12/9><Year>:<12/9/04><Station>:<TLC><EpisodeTitle>:<The Magic School Bus Gets Lost in Space><FSID>:<186875/11><TyStream>:</196585/196586><TotalSize>:<618>
+<Title>:<Lost><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<KOAT><EpisodeTitle>:<All the Best Cowboys Have Daddy Issues><FSID>:<186782/11><TyStream>:</195559/195560/195561><TotalSize>:<1236>
+<Title>:<Totally Spies><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<TOONP><EpisodeTitle>:<Alex Quits><FSID>:<186764/11><TyStream>:</195557/195558><TotalSize>:<619>
+<Title>:<Lilo & Stitch><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<DISNP><EpisodeTitle>:<The Asteroid><FSID>:<186835/11><TyStream>:</195553/195554><TotalSize>:<618>
+<Title>:<Tom & Jerry><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<TOONP><EpisodeTitle>:<><FSID>:<186820/11><TyStream>:</195501/195503/195504><TotalSize>:<1236>
+<Title>:<What's New Scooby-Doo?><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<TOONP><EpisodeTitle>:<Mummy Scares Best><FSID>:<186784/11><TyStream>:</195499><TotalSize>:<371>
+<Title>:<Comedy Central Presents><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<COMEDYP><EpisodeTitle>:<Scott Kennedy><FSID>:<186772/11><TyStream>:</195497/195498><TotalSize>:<618>
+<Title>:<The Magic School Bus><Day>:<Wed><Date>:<12/8><Year>:<12/8/04><Station>:<TLC><EpisodeTitle>:<The Magic School Bus Takes a Dive><FSID>:<186874/11><TyStream>:</195432/195433><TotalSize>:<620>
+<Title>:<Queer Eye for the Straight Guy><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<BRAVO><EpisodeTitle>:<A Very Queer Eye Christmas><FSID>:<194209/11><TyStream>:</194214/194216><TotalSize>:<672>
+<Title>:<Queer Eye for the Straight Guy><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<BRAVO><EpisodeTitle>:<A Very Queer Eye Christmas><FSID>:<189192/11><TyStream>:</194207/194208><TotalSize>:<892>
+<Title>:<The Amazing Race 6><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<KRQE><EpisodeTitle>:<What if It Isn't Sanitary><FSID>:<186750/11><TyStream>:</194197/194199/194200><TotalSize>:<1236>
+<Title>:<Totally Spies><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<TOONP><EpisodeTitle>:<Nature Nightmare><FSID>:<186763/11><TyStream>:</194183/194184><TotalSize>:<620>
+<Title>:<Lilo & Stitch><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<DISNP><EpisodeTitle>:<Yapper><FSID>:<186834/11><TyStream>:</194179/194180><TotalSize>:<618>
+<Title>:<Comedy Central Presents><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<178504/11><TyStream>:</194126/194153><TotalSize>:<620>
+<Title>:<What's New Scooby-Doo?><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<TOONP><EpisodeTitle>:<Large Dragon at Large><FSID>:<178505/11><TyStream>:</194124><TotalSize>:<371>
+<Title>:<Comedy Central Presents><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<178503/11><TyStream>:</194114/194123><TotalSize>:<620>
+<Title>:<The Magic School Bus><Day>:<Tue><Date>:<12/7><Year>:<12/7/04><Station>:<TLC><EpisodeTitle>:<The Magic School Bus in the City><FSID>:<179480/11><TyStream>:</194049/194050><TotalSize>:<618>
+<Title>:<Totally Spies><Day>:<Mon><Date>:<12/6><Year>:<12/6/04><Station>:<TOONP><EpisodeTitle>:<Animal World><FSID>:<178502/11><TyStream>:</192972/192973><TotalSize>:<619>
+<Title>:<Lilo & Stitch><Day>:<Mon><Date>:<12/6><Year>:<12/6/04><Station>:<DISNP><EpisodeTitle>:<Mr. Stenchy><FSID>:<178512/11><TyStream>:</192968/192969><TotalSize>:<620>
+<Title>:<Tom & Jerry><Day>:<Mon><Date>:<12/6><Year>:<12/6/04><Station>:<TOONP><EpisodeTitle>:<><FSID>:<177436/11><TyStream>:</192942/192943/192944><TotalSize>:<1236>
+<Title>:<Comedy Central Presents><Day>:<Mon><Date>:<12/6><Year>:<12/6/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<177429/11><TyStream>:</192940/192941><TotalSize>:<620>
+<Title>:<The Magic School Bus><Day>:<Mon><Date>:<12/6><Year>:<12/6/04><Station>:<TLC><EpisodeTitle>:<The Magic School Bus Gets Programmed><FSID>:<179479/11><TyStream>:</192875/192876><TotalSize>:<620>
+<Title>:<Comedy Central Presents><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<177428/11><TyStream>:</191955/192688><TotalSize>:<618>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<TOONP><EpisodeTitle>:<Rock Bottom><FSID>:<177416/11><TyStream>:</191927/191928><TotalSize>:<620>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<TOONP><EpisodeTitle>:<Routine><FSID>:<177415/11><TyStream>:</191925/191926><TotalSize>:<620>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<TOONP><EpisodeTitle>:<Zero Gravity Zone><FSID>:<175353/11><TyStream>:</191923/191924><TotalSize>:<618>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<TOONP><EpisodeTitle>:<The Robots><FSID>:<175352/11><TyStream>:</191921/191922><TotalSize>:<620>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<TOONP><EpisodeTitle>:<Logbook><FSID>:<175351/11><TyStream>:</191819/191821><TotalSize>:<620>
+<Title>:<Tom & Jerry><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<TOONP><EpisodeTitle>:<><FSID>:<175367/11><TyStream>:</191793/191794/191795><TotalSize>:<1236>
+<Title>:<The Wild Thornberrys><Day>:<Sun><Date>:<12/5><Year>:<12/5/04><Station>:<NIK><EpisodeTitle>:<Pal Joey><FSID>:<175366/11><TyStream>:</191785/191786><TotalSize>:<620>
+<Title>:<MAD TV><Day>:<Sat><Date>:<12/4><Year>:<12/4/04><Station>:<KASA><EpisodeTitle>:<><FSID>:<175373/11><TyStream>:</191719/191720/191729><TotalSize>:<1236>
+<Title>:<The Amanda Show><Day>:<Sat><Date>:<12/4><Year>:<12/4/04><Station>:<NIK><EpisodeTitle>:<><FSID>:<175372/11><TyStream>:</190681/190682><TotalSize>:<619>
+<Title>:<Tom & Jerry><Day>:<Sat><Date>:<12/4><Year>:<12/4/04><Station>:<TOONP><EpisodeTitle>:<><FSID>:<174279/11><TyStream>:</190627/190629/190630><TotalSize>:<1240>
+<Title>:<Totally Spies><Day>:<Sat><Date>:<12/4><Year>:<12/4/04><Station>:<TOONP><EpisodeTitle>:<First Brat><FSID>:<174269/11><TyStream>:</190605/190606><TotalSize>:<620>
+<Title>:<The Wild Thornberrys><Day>:<Sat><Date>:<12/4><Year>:<12/4/04><Station>:<NIK><EpisodeTitle>:<Reef Grief><FSID>:<174277/11><TyStream>:</190546/190547><TotalSize>:<620>
+<Title>:<Totally Spies><Day>:<Thu><Date>:<12/2><Year>:<12/2/04><Station>:<TOONP><EpisodeTitle>:<S.P.I.><FSID>:<172992/11><TyStream>:</188273/188275><TotalSize>:<620>
+<Title>:<Lost><Day>:<Wed><Date>:<12/1><Year>:<12/1/04><Station>:<KOAT><EpisodeTitle>:<Raised by Another><FSID>:<172999/11><TyStream>:</187035/187036/187037><TotalSize>:<1256>
+<Title>:<Totally Spies><Day>:<Wed><Date>:<12/1><Year>:<12/1/04><Station>:<TOONP><EpisodeTitle>:<Stark Raving Mad><FSID>:<172991/11><TyStream>:</187033/187034><TotalSize>:<619>
+<Title>:<The Amazing Race 6><Day>:<Tue><Date>:<11/30><Year>:<11/30/04><Station>:<KRQE><EpisodeTitle>:<Counting Bears Is Not Rocket Science><FSID>:<170686/11><TyStream>:</180398/180400/180401><TotalSize>:<1236>
+<Title>:<Totally Spies><Day>:<Tue><Date>:<11/30><Year>:<11/30/04><Station>:<TOONP><EpisodeTitle>:<W.O.W.><FSID>:<170689/11><TyStream>:</180383/180386><TotalSize>:<620>
+<Title>:<The Wild Thornberrys><Day>:<Tue><Date>:<11/30><Year>:<11/30/04><Station>:<NIK><EpisodeTitle>:<New Territory><FSID>:<170698/11><TyStream>:</180340/180341><TotalSize>:<620>
+<Title>:<Mickey's Once Upon a Christmas><Day>:<Mon><Date>:<11/29><Year>:<11/29/04><Station>:<DISNP><EpisodeTitle>:<><FSID>:<179483/11><TyStream>:</180157/180158/180159/180160/180161/180162/180163><TotalSize>:<3202>
+<Title>:<The Wild Thornberrys><Day>:<Mon><Date>:<11/29><Year>:<11/29/04><Station>:<NIK><EpisodeTitle>:<Where the Gauchos Roam><FSID>:<170697/11><TyStream>:</180056/180057><TotalSize>:<618>
+<Title>:<Totally Spies><Day>:<Sun><Date>:<11/28><Year>:<11/28/04><Station>:<TOONP><EpisodeTitle>:<Planet of the Hunks><FSID>:<170687/11><TyStream>:</179769/179770><TotalSize>:<620>
+<Title>:<The Amanda Show><Day>:<Sun><Date>:<11/28><Year>:<11/28/04><Station>:<NIK><EpisodeTitle>:<><FSID>:<166644/11><TyStream>:</179731/179735><TotalSize>:<620>
+<Title>:<The 100 Greatest TV Characters><Day>:<Sun><Date>:<11/28><Year>:<11/28/04><Station>:<BRAVO><EpisodeTitle>:<><FSID>:<175957/712><TyStream>:</179699/179700/179701/179702/179703/179704/179705/179706/179715><TotalSize>:<1968>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<11/28><Year>:<11/28/04><Station>:<TOONP><EpisodeTitle>:<Holiday in the Fog><FSID>:<166634/11><TyStream>:</179673/179675><TotalSize>:<620>
+<Title>:<MAD TV><Day>:<Sat><Date>:<11/27><Year>:<11/27/04><Station>:<KASA><EpisodeTitle>:<><FSID>:<166645/11><TyStream>:</179527/179529/179530><TotalSize>:<1236>
+<Title>:<Dora the Explorer><Day>:<Sat><Date>:<11/27><Year>:<11/27/04><Station>:<KRQE><EpisodeTitle>:<Meet Diego!><FSID>:<165617/11><TyStream>:</179372/179380><TotalSize>:<620>
+<Title>:<A Pup Named Scooby-Doo><Day>:<Sat><Date>:<11/27><Year>:<11/27/04><Station>:<TOONP><EpisodeTitle>:<Ghost Who's Coming to Dinner?><FSID>:<165615/11><TyStream>:</179356/179358><TotalSize>:<620>
+<Title>:<What's New Scooby-Doo?><Day>:<Sat><Date>:<11/27><Year>:<11/27/04><Station>:<TOONP><EpisodeTitle>:<Uncle Scooby and Antarctica><FSID>:<165616/11><TyStream>:</179329><TotalSize>:<376>
+<Title>:<Queer Eye for the Straight Guy><Day>:<Thu><Date>:<11/25><Year>:<11/25/04><Station>:<BRAVO><EpisodeTitle>:<Thanksgiving><FSID>:<177515/11><TyStream>:</179001/179003/179004/179005><TotalSize>:<1624>
+<Title>:<The Wild Thornberrys><Day>:<Thu><Date>:<11/25><Year>:<11/25/04><Station>:<NIK><EpisodeTitle>:<Family Tradition><FSID>:<170696/11><TyStream>:</178984/178988><TotalSize>:<620>
+<Title>:<The Amazing Race 6><Day>:<Tue><Date>:<11/23><Year>:<11/23/04><Station>:<KRQE><EpisodeTitle>:<I'm Not His Wife -- He Doesn't Need to Scream at Me><FSID>:<166932/11><TyStream>:</177530/177541/177542><TotalSize>:<1236>
+<Title>:<What's New Scooby-Doo?><Day>:<Tue><Date>:<11/23><Year>:<11/23/04><Station>:<TOONP><EpisodeTitle>:<Riva Ras Regas><FSID>:<160653/11><TyStream>:</177452><TotalSize>:<376>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<11/21><Year>:<11/21/04><Station>:<TOONP><EpisodeTitle>:<Seeing Is Believing><FSID>:<157758/11><TyStream>:</174503/174505><TotalSize>:<620>
+<Title>:<MAD TV><Day>:<Sat><Date>:<11/20><Year>:<11/20/04><Station>:<KASA><EpisodeTitle>:<><FSID>:<157770/11><TyStream>:</173302/174290/174291><TotalSize>:<1236>
+<Title>:<The Amanda Show><Day>:<Sat><Date>:<11/20><Year>:<11/20/04><Station>:<NIK><EpisodeTitle>:<><FSID>:<157769/11><TyStream>:</173279/173281><TotalSize>:<620>
+<Title>:<Dora the Explorer><Day>:<Sat><Date>:<11/20><Year>:<11/20/04><Station>:<KRQE><EpisodeTitle>:<Baseball Boots><FSID>:<156772/11><TyStream>:</173169/173171><TotalSize>:<620>
+<Title>:<A Pup Named Scooby-Doo><Day>:<Sat><Date>:<11/20><Year>:<11/20/04><Station>:<TOONP><EpisodeTitle>:<Catcher on the Sly><FSID>:<156769/11><TyStream>:</173155/173156><TotalSize>:<619>
+<Title>:<Lost><Day>:<Wed><Date>:<11/17><Year>:<11/17/04><Station>:<KOAT><EpisodeTitle>:<Solitary><FSID>:<155575/11><TyStream>:</167418/167419/167420><TotalSize>:<1248>
+<Title>:<A Pup Named Scooby-Doo><Day>:<Wed><Date>:<11/17><Year>:<11/17/04><Station>:<TOONP><EpisodeTitle>:<Night of the Boogey Biker><FSID>:<153109/11><TyStream>:</167381/167382><TotalSize>:<620>
+<Title>:<The Amazing Race 6><Day>:<Tue><Date>:<11/16><Year>:<11/16/04><Station>:<KRQE><EpisodeTitle>:<The Game's Afoot><FSID>:<166931/11><TyStream>:</167207/167208/167209/167210/167211><TotalSize>:<2472>
+<Title>:<The New Scooby-Doo Movies><Day>:<Sun><Date>:<11/14><Year>:<11/14/04><Station>:<TOONP><EpisodeTitle>:<The Spirited Spooked Sports Show><FSID>:<163455/286><TyStream>:</165760/165761/165762/165763/165764/165765/165766/165767/165774/165782><TotalSize>:<2584>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<11/14><Year>:<11/14/04><Station>:<TOONP><EpisodeTitle>:<Teddygodzilla><FSID>:<148582/11><TyStream>:</165729/165730><TotalSize>:<620>
+<Title>:<MAD TV><Day>:<Sat><Date>:<11/13><Year>:<11/13/04><Station>:<KASA><EpisodeTitle>:<><FSID>:<148594/11><TyStream>:</164741/164742/165591><TotalSize>:<1236>
+<Title>:<The Amanda Show><Day>:<Sat><Date>:<11/13><Year>:<11/13/04><Station>:<NIK><EpisodeTitle>:<><FSID>:<148593/11><TyStream>:</164719/164720><TotalSize>:<620>
+<Title>:<Dora the Explorer><Day>:<Sat><Date>:<11/13><Year>:<11/13/04><Station>:<KRQE><EpisodeTitle>:<Stuck Truck><FSID>:<147511/11><TyStream>:</164624/164625><TotalSize>:<620>
+<Title>:<Teleworld Paid Program><Day>:<Thu><Date>:<11/11><Year>:<11/11/04><Station>:<DSC><EpisodeTitle>:<><FSID>:<162299/13><TyStream>:</162301/162302/162303/162304><TotalSize>:<826>
+<Title>:<Lost><Day>:<Wed><Date>:<11/10><Year>:<11/10/04><Station>:<KOAT><EpisodeTitle>:<Confidence Man><FSID>:<145073/11><TyStream>:</160849/160865/160866><TotalSize>:<1280>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<11/7><Year>:<11/7/04><Station>:<TOONP><EpisodeTitle>:<Claustrophobia><FSID>:<139687/11><TyStream>:</156972/156973><TotalSize>:<619>
+<Title>:<Code Lyoko><Day>:<Sun><Date>:<11/7><Year>:<11/7/04><Station>:<TOONP><EpisodeTitle>:<False Start><FSID>:<156881/11><TyStream>:</156890><TotalSize>:<140>
+<Title>:<Lost><Day>:<Wed><Date>:<11/3><Year>:<11/3/04><Station>:<KOAT><EpisodeTitle>:<The Moth><FSID>:<135977/11><TyStream>:</152066/152067/152068><TotalSize>:<1257>
+<Title>:<Veronica Mars><Day>:<Tue><Date>:<11/2><Year>:<11/2/04><Station>:<KASY><EpisodeTitle>:<The Return of Kane><FSID>:<134769/11><TyStream>:</150838/150840/150843><TotalSize>:<1236>
+<Title>:<The Daily Show With Jon Stewart><Day>:<Tue><Date>:<11/2><Year>:<11/2/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<149655/11><TyStream>:</149657/149658><TotalSize>:<620>
+<Title>:<Saturday Night Live Presidential Bash 2004: The Great Debates><Day>:<Mon><Date>:<11/1><Year>:<11/1/04><Station>:<KOB><EpisodeTitle>:<><FSID>:<147531/11><TyStream>:</149637/149638/149639><TotalSize>:<1240>
+<Title>:<The Wild Thornberrys><Day>:<Mon><Date>:<11/1><Year>:<11/1/04><Station>:<NIKP><EpisodeTitle>:<Dances With Dingoes><FSID>:<179373/13><TyStream>:</179376/179377/179378/179379><TotalSize>:<646>
+<Title>:<MAD TV><Day>:<Sat><Date>:<10/30><Year>:<10/30/04><Station>:<KASA><EpisodeTitle>:<><FSID>:<132315/11><TyStream>:</146516/146517/146518><TotalSize>:<1240>
+<Title>:<The Amanda Show><Day>:<Sat><Date>:<10/30><Year>:<10/30/04><Station>:<NIK><EpisodeTitle>:<Moody's Point><FSID>:<132314/11><TyStream>:</146499/146500><TotalSize>:<618>
+<Title>:<Dora the Explorer><Day>:<Sat><Date>:<10/30><Year>:<10/30/04><Station>:<KRQE><EpisodeTitle>:<Boo!><FSID>:<129799/11><TyStream>:</146383/146384><TotalSize>:<620>
+<Title>:<A Pup Named Scooby-Doo><Day>:<Sat><Date>:<10/30><Year>:<10/30/04><Station>:<TOONP><EpisodeTitle>:<Terror, Thy Name Is Zombo><FSID>:<129796/11><TyStream>:</146356/146357><TotalSize>:<620>
+<Title>:<A Pup Named Scooby-Doo><Day>:<Fri><Date>:<10/29><Year>:<10/29/04><Station>:<TOONP><EpisodeTitle>:<Dog Gone Scooby><FSID>:<128697/11><TyStream>:</145241/145242><TotalSize>:<620>
+<Title>:<The Daily Show With Jon Stewart><Day>:<Thu><Date>:<10/28><Year>:<10/28/04><Station>:<COMEDYP><EpisodeTitle>:<John Zogby><FSID>:<145107/11><TyStream>:</145110/145113><TotalSize>:<619>
+<Title>:<Scrubs><Day>:<Tue><Date>:<10/26><Year>:<10/26/04><Station>:<KOB><EpisodeTitle>:<My Last Chance><FSID>:<141534/11><TyStream>:</141587/141588><TotalSize>:<619>
+<Title>:<Dora the Explorer><Day>:<Sat><Date>:<10/23><Year>:<10/23/04><Station>:<KRQE><EpisodeTitle>:<Star Catching Adventure><FSID>:<121220/11><TyStream>:</137486/137487><TotalSize>:<619>
+<Title>:<Bugs Bunny's 3rd Movie: 1001 Rabbit Tales><Day>:<Fri><Date>:<10/22><Year>:<10/22/04><Station>:<HBO><EpisodeTitle>:<><FSID>:<137591/13><TyStream>:</137593/137594/137595/137597/137598/137599/137600/137601/137602><TotalSize>:<1616>
+<Title>:<Presidential Debate><Day>:<Fri><Date>:<10/8><Year>:<10/8/04><Station>:<KNME><EpisodeTitle>:<><FSID>:<108846/11><TyStream>:</119142/119143/119144/119145/119148><TotalSize>:<2472>
+<Title>:<Understanding: Sleep><Day>:<Fri><Date>:<10/1><Year>:<10/1/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110245/13><TyStream>:</110249/110256/110262/110268/110276/110277><TotalSize>:<1093>
+<Title>:<Understanding: Widgits><Day>:<Fri><Date>:<10/1><Year>:<10/1/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110251/13><TyStream>:</110278/110280/110281/110283/110284/110286/110288><TotalSize>:<1335>
+<Title>:<Presidential Debate><Day>:<Thu><Date>:<9/30><Year>:<9/30/04><Station>:<KNME><EpisodeTitle>:<><FSID>:<106301/11><TyStream>:</109100/109101/109102/109103/109104><TotalSize>:<2472>
+<Title>:<Understanding: Oceans><Day>:<Wed><Date>:<9/29><Year>:<9/29/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110258/13><TyStream>:</110289/110290/110292/110293/110295/110296><TotalSize>:<1265>
+<Title>:<Understanding: Tunnels><Day>:<Tue><Date>:<9/28><Year>:<9/28/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110264/13><TyStream>:</110298/110300/110301/110303/110304/110305><TotalSize>:<1140>
+<Title>:<Understanding: Traffic><Day>:<Mon><Date>:<9/27><Year>:<9/27/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110318/13><TyStream>:</110322/110330/110335/110337/110338/110340><TotalSize>:<1292>
+<Title>:<Understanding: Uncertainty><Day>:<Mon><Date>:<9/20><Year>:<9/20/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110325/13><TyStream>:</110341/110343/110345/110486/111127><TotalSize>:<959>
+<Title>:<Understanding: Risk-Takers/Thrill Seekers><Day>:<Wed><Date>:<9/15><Year>:<9/15/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<110332/13><TyStream>:</111146/111226/111228/111229/111231/111232><TotalSize>:<1221>
+<Title>:<Comedy Central Presents><Day>:<Mon><Date>:<9/13><Year>:<9/13/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<71713/11><TyStream>:</87421/87422><TotalSize>:<618>
+<Title>:<Comedy Central Presents><Day>:<Sun><Date>:<9/12><Year>:<9/12/04><Station>:<COMEDYP><EpisodeTitle>:<><FSID>:<71709/11><TyStream>:</87242/87243><TotalSize>:<620>
+<Title>:<Casper><Day>:<Wed><Date>:<9/1><Year>:<9/1/04><Station>:<FAM><EpisodeTitle>:<><FSID>:<69069/11><TyStream>:</73451/73452/73453/73454/73455><TotalSize>:<2472>
+<Title>:<XXVIII Summer Olympics><Day>:<Sun><Date>:<8/29><Year>:<8/29/04><Station>:<KOB><EpisodeTitle>:<Boxing, Gymnastics, Handball, Track and Field, Water Polo><FSID>:<52268/11><TyStream>:</69041/69046/69047/69048/69049/69050/69051/69052/69055/69056/69057/69058/69059/69060/69061/69062/69063/69065/69098/69102/69149/69150/69151/69152/69153/69154><TotalSize>:<12972>
+<Title>:<XXVIII Summer Olympics><Day>:<Sat><Date>:<8/28><Year>:<8/28/04><Station>:<KOB><EpisodeTitle>:<Canoeing, Diving, Track and Field, Wrestling><FSID>:<52266/11><TyStream>:</67889/67890/67891/67892/67895/67898/67907/67918/67919/67920/67921/67924/67931><TotalSize>:<6486>
+<Title>:<XXVIII Summer Olympics><Day>:<Fri><Date>:<8/27><Year>:<8/27/04><Station>:<KOB><EpisodeTitle>:<Cycling, Volleyball, Wrestling><FSID>:<51212/11><TyStream>:</67591/67598/67599/67600/67601><TotalSize>:<2304>
+<Title>:<XXVIII Summer Olympics><Day>:<Fri><Date>:<8/27><Year>:<8/27/04><Station>:<KOB><EpisodeTitle>:<Diving, Synchronized Swimming, Track and Field><FSID>:<112640/13><TyStream>:</112656/112657/112659/112660/112661/112662/112663/112665/112668/112670/112672/112674/112676><TotalSize>:<6488>
+<Title>:<XXVIII Summer Olympics><Day>:<Thu><Date>:<8/26><Year>:<8/26/04><Station>:<KOB><EpisodeTitle>:<Diving, Track and Field, Volleyball><FSID>:<50030/11><TyStream>:</65368/65369/65378/65379/65380/65381/66407/66457/66458/66459/66460/66461/66462><TotalSize>:<6488>
+<Title>:<XXVIII Summer Olympics><Day>:<Thu><Date>:<8/26><Year>:<8/26/04><Station>:<KOB><EpisodeTitle>:<Soccer, Synchronized Swimming, Water Polo><FSID>:<48719/11><TyStream>:</65314/65315/65316/65317/65318/65319/65320/65321/65347/65348/65349/65350><TotalSize>:<5676>
+<Title>:<XXVIII Summer Olympics><Day>:<Wed><Date>:<8/25><Year>:<8/25/04><Station>:<KOB><EpisodeTitle>:<Diving, Track and Field, Triathlon, Wrestling><FSID>:<48717/11><TyStream>:</64122/64123/64124/64133/64134/64143/64144/64145/64146/65043/65044/65045/65046><TotalSize>:<6488>
+<Title>:<XXVIII Summer Olympics><Day>:<Wed><Date>:<8/25><Year>:<8/25/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Canoeing, Cycling, Synchronized Swimming><FSID>:<47716/11><TyStream>:</64073/64074/64075/64076/64077/64078/64079/64080/64106/64107/64108/64109><TotalSize>:<5676>
+<Title>:<XXVIII Summer Olympics><Day>:<Tue><Date>:<8/24><Year>:<8/24/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Diving, Gymnastics, Track and Field, Wrestling><FSID>:<47714/11><TyStream>:</62815/62816/62817/62818/62819/62820/62829/62830/62831/63967/63968/63969/63970><TotalSize>:<6488>
+<Title>:<XXVIII Summer Olympics><Day>:<Tue><Date>:<8/24><Year>:<8/24/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Diving, Track and Field><FSID>:<47713/11><TyStream>:</62757/62758/62759/62760/62761/62762/62763/62764/62765/62766/62767/62793><TotalSize>:<5676>
+<Title>:<XXVIII Summer Olympics><Day>:<Mon><Date>:<8/23><Year>:<8/23/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Gymnastics, Track and Field><FSID>:<47711/11><TyStream>:</61735/61736/61741/61753/61768/61769/61778/61779/61780/61781/61782/61783/62618><TotalSize>:<6488>
+<Title>:<XXVIII Summer Olympics><Day>:<Mon><Date>:<8/23><Year>:<8/23/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Diving, Track and Field, Water Polo><FSID>:<47710/11><TyStream>:</61706/61707/61708/61709/61710/61711/61712/61713/61714/61715/61716/61717><TotalSize>:<5680>
+<Title>:<Kindergarten><Day>:<Mon><Date>:<8/23><Year>:<8/23/04><Station>:<HBOF><EpisodeTitle>:<><FSID>:<82020/13><TyStream>:</82904/82917/82928><TotalSize>:<614>
+<Title>:<XXVIII Summer Olympics><Day>:<Sun><Date>:<8/22><Year>:<8/22/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Cycling, Track and Field><FSID>:<47709/11><TyStream>:</60939/60940/60941/60942/60943><TotalSize>:<2304>
+<Title>:<XXVIII Summer Olympics><Day>:<Sun><Date>:<8/22><Year>:<8/22/04><Station>:<KOB><EpisodeTitle>:<Beach Volleyball, Diving, Gymnastics, Track and Field><FSID>:<47708/11><TyStream>:</60112/60113/60114/60115/60116/60121/60122/60129/60148/60149/60156/60159/60166/60167/60824/60937><TotalSize>:<8112>
+<Title>:<XXVIII Summer Olympics><Day>:<Wed><Date>:<8/18><Year>:<8/18/04><Station>:<KOB><EpisodeTitle>:<Gymnastics, Swimming, Track and Field><FSID>:<112644/13><TyStream>:</112678/112680/112682/112684/112686/112688/112692/112693/112694/112695/112759/112760/112761><TotalSize>:<6485>
+<Title>:<Adoption Stories><Day>:<Mon><Date>:<8/16><Year>:<8/16/04><Station>:<DHC><EpisodeTitle>:<Gabriel's New Family><FSID>:<52349/11><TyStream>:</52977/52978><TotalSize>:<620>
+<Title>:<Understanding: Flight><Day>:<Fri><Date>:<8/13><Year>:<8/13/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<51401/13><TyStream>:</51428/51429/51430/51432/51433><TotalSize>:<1076>
+<Title>:<Discover Magazine><Day>:<Fri><Date>:<8/13><Year>:<8/13/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<51406/13><TyStream>:</51434/51435/51437><TotalSize>:<550>
+<Title>:<Understanding: Archaeological Mysteries><Day>:<Thu><Date>:<8/12><Year>:<8/12/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<47741/13><TyStream>:</47744/47750/47752/48576/48643/48662><TotalSize>:<1231>
+<Title>:<Understanding: Magnetism><Day>:<Wed><Date>:<8/11><Year>:<8/11/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<47746/13><TyStream>:</48671/48682/48697/48720/48730><TotalSize>:<1016>
+<Title>:<Understanding: Bridges><Day>:<Tue><Date>:<8/10><Year>:<8/10/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48646/13><TyStream>:</48740/48749/48750/48751/48752/48753><TotalSize>:<1228>
+<Title>:<Understanding: Weather><Day>:<Mon><Date>:<8/9><Year>:<8/9/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48654/13><TyStream>:</48755/48757/48759/48761/48763><TotalSize>:<1060>
+<Title>:<Dora the Explorer><Day>:<Sat><Date>:<8/7><Year>:<8/7/04><Station>:<KRQE><EpisodeTitle>:<Roberto the Robot><FSID>:<24835/11><TyStream>:</41352/41353><TotalSize>:<620>
+<Title>:<The Black Cauldron><Day>:<Fri><Date>:<8/6><Year>:<8/6/04><Station>:<TOOND><EpisodeTitle>:<><FSID>:<41377/13><TyStream>:</41391/41392/41393/41395/41396/41397/41398/41399/41400/41401/41402><TotalSize>:<2061>
+<Title>:<Jetsons: The Movie><Day>:<Fri><Date>:<8/6><Year>:<8/6/04><Station>:<WAM><EpisodeTitle>:<><FSID>:<41372/13><TyStream>:</41375/41381/41382/41383/41384/41385/41387/41389/41390><TotalSize>:<1852>
+<Title>:<Understanding: The Universe><Day>:<Thu><Date>:<8/5><Year>:<8/5/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48664/13><TyStream>:</48776/48794/48812/48814/48822><TotalSize>:<1028>
+<Title>:<Understanding: Money><Day>:<Wed><Date>:<8/4><Year>:<8/4/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48668/13><TyStream>:</48824/48829/48833/48835/48837/48839><TotalSize>:<1233>
+<Title>:<Rudyard Kipling's The Jungle Book><Day>:<Wed><Date>:<8/4><Year>:<8/4/04><Station>:<HBO><EpisodeTitle>:<><FSID>:<41431/13><TyStream>:</41479/41481/41484/41485/41486/41487/41489/41491/41492/41493/41495><TotalSize>:<3112>
+<Title>:<Late Show With David Letterman><Day>:<Tue><Date>:<8/3><Year>:<8/3/04><Station>:<KRQE><EpisodeTitle>:<><FSID>:<36466/11><TyStream>:</37430/37431/37432><TotalSize>:<1280>
+<Title>:<Understanding: Uncertainty><Day>:<Tue><Date>:<8/3><Year>:<8/3/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48673/13><TyStream>:</48841/48843/48877/48888/48890><TotalSize>:<884>
+<Title>:<Understanding: Murder><Day>:<Mon><Date>:<8/2><Year>:<8/2/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48685/13><TyStream>:</48891/48893/48896/48897/48898/48899><TotalSize>:<1089>
+<Title>:<Baby Geniuses><Day>:<Sun><Date>:<8/1><Year>:<8/1/04><Station>:<FAM><EpisodeTitle>:<><FSID>:<47363/13><TyStream>:</47387/47388/47391/47394/47398/47401/47405><TotalSize>:<3244>
+<Title>:<Understanding: Beauty><Day>:<Fri><Date>:<7/30><Year>:<7/30/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48692/13><TyStream>:</48900/48901/48903/48904/48905><TotalSize>:<1039>
+<Title>:<Understanding: Amazing Brain><Day>:<Thu><Date>:<7/29><Year>:<7/29/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48707/13><TyStream>:</48907/48908/48909/48910/48911/48913><TotalSize>:<1123>
+<Title>:<Understanding: Laughter><Day>:<Wed><Date>:<7/28><Year>:<7/28/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48737/13><TyStream>:</48914/48915/48916/48917/48918/48920><TotalSize>:<1133>
+<Title>:<Understanding: Television><Day>:<Tue><Date>:<7/27><Year>:<7/27/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48746/13><TyStream>:</48921/48922/48923/48924/48925/48926><TotalSize>:<1122>
+<Title>:<Understanding: Caves><Day>:<Mon><Date>:<7/26><Year>:<7/26/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48779/13><TyStream>:</48927/48928/48929/48931/48933/48935><TotalSize>:<1145>
+<Title>:<The Looney, Looney, Looney Bugs Bunny Movie><Day>:<Mon><Date>:<7/26><Year>:<7/26/04><Station>:<HBOF><EpisodeTitle>:<><FSID>:<27965/13><TyStream>:</27968/27980/27985/27990/27991/27995/28006/28011/28012><TotalSize>:<1852>
+<Title>:<Daffy Duck's Movie: Fantastic Island><Day>:<Mon><Date>:<7/26><Year>:<7/26/04><Station>:<HBOC><EpisodeTitle>:<><FSID>:<27974/13><TyStream>:</28016/28018/28019/28020/28021/28023/28024/28026><TotalSize>:<1545>
+<Title>:<Understanding: Fire><Day>:<Fri><Date>:<7/23><Year>:<7/23/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48783/13><TyStream>:</48936/48939/48940/48941/48942/48943><TotalSize>:<1212>
+<Title>:<Understanding: Pyramids><Day>:<Wed><Date>:<7/21><Year>:<7/21/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48791/13><TyStream>:</48951/48952/48953/48955/48957><TotalSize>:<1076>
+<Title>:<Everything You Always Wanted to Know About Sex (But Were Afraid to Ask)><Day>:<Wed><Date>:<7/21><Year>:<7/21/04><Station>:<SUNDAE><EpisodeTitle>:<><FSID>:<47635/13><TyStream>:</47664/47667/47720/47724/47726/47732/47734/47736><TotalSize>:<2153>
+<Title>:<Understanding: The Senses><Day>:<Tue><Date>:<7/20><Year>:<7/20/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48796/13><TyStream>:</48959/48961/48963/48965/48967/48969><TotalSize>:<1153>
+<Title>:<Groove Squad Cheerleaders><Day>:<Tue><Date>:<7/20><Year>:<7/20/04><Station>:<HBO><EpisodeTitle>:<><FSID>:<22988/13><TyStream>:</23056/23057/23058/23060/23062/23064/23067/23070><TotalSize>:<2022>
+<Title>:<Understanding: Ice><Day>:<Mon><Date>:<7/19><Year>:<7/19/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48801/13><TyStream>:</48971/48973/48975/48977/48979/48981><TotalSize>:<1184>
+<Title>:<The Bugs Bunny/Road Runner Movie><Day>:<Sat><Date>:<7/17><Year>:<7/17/04><Station>:<HBOC><EpisodeTitle>:<><FSID>:<20167/13><TyStream>:</21313/22316/22324/22367/22382/22391/22393/22395/22397><TotalSize>:<1743>
+<Title>:<Understanding: Odds><Day>:<Fri><Date>:<7/16><Year>:<7/16/04><Station>:<SCIENCE><EpisodeTitle>:<><FSID>:<48805/13><TyStream>:</48982/48984/48987/48989/48991/48993><TotalSize>:<1117>
+<Title>:<The Artists' Specials: Monet: Shadow and Light><Day>:<Tue><Date>:<7/13><Year>:<7/13/04><Station>:<HBOFP><EpisodeTitle>:<><FSID>:<47631/13><TyStream>:</47652/47654/47656/47658/47660/47662><TotalSize>:<1170>
+<Title>:<Curse of the Pink Panther><Day>:<Wed><Date>:<7/7><Year>:<7/7/04><Station>:<FLIX><EpisodeTitle>:<><FSID>:<47367/13><TyStream>:</47407/47408/47410/47412/47413/47415/47417/47418/47420/47422/47423><TotalSize>:<1361>
