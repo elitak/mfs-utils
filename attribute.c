@@ -141,7 +141,7 @@ get_tivo_version()
 	    !get_attribute_fsid(fsid, "SwSystem", 0xffffffff, "Name", &attr) ||
 	    attr.type != TYPE_STRING) {
 		fprintf(stderr, "Can't find TiVo version!\n");
-		exit(1);
+		return strdup("UNKNOWN");
 	}
 	retval = strdup(attr.u.string[0]);
 	attr_release(&attr);

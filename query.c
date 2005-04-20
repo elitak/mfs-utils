@@ -3,7 +3,6 @@
   tridge@samba.org, January 2001
   released under the Gnu GPL v2
 */
-#define _GNU_SOURCE
 #include <time.h>
 #include "mfs.h"
 

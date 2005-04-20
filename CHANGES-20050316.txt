@@ -1,3 +1,0 @@
-Jamie
-	Fix memory leak in generate_NowShowing.c;  Fix caching problem in parse.c
-	Thanks to jimthev for pointing out the memory leak.

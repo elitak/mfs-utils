@@ -3,7 +3,7 @@ DEBUG=0
 STATIC=0
 USE_TRIDGE_MFS_SO=0
 
-CFLAGS = -Wall -I. -I/sw/include -I/sw/include/gnugetopt
+CFLAGS = -Wall -I. -I/sw/include -I/sw/include/gnugetopt -I../include -D_GNU_SOURCE
 CCLDFLAGS =
 
 IS_TIVO := $(shell grep -qsE 'Teleworld|TiVo' /proc/cpuinfo && echo 1 || echo 0)

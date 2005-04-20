@@ -206,6 +206,7 @@ static void dumpobj(int fsid, int fileobj, int recurse, const char *path)
 				strcat( newpath, "/" );
 				dumpobj( dir[i].fsid, fileobj, 1, newpath );
 			}
+			if (dir) mfs_dir_free(dir);
 		}
 		break;
 

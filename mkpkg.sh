@@ -1,6 +1,9 @@
 #!/bin/sh
+
 MYARCH=`uname -ms | tr ' ' -`
-set -x
+if [ $# -gt 0 -a "$1" = "-all" ]; then
+   ALL=1
+fi
 
 TMPDIR=/tmp
 DATESTR=`date +'%Y%m%d'`
@@ -29,8 +32,10 @@ make
 else
 make STATIC=1
 fi
-make ARCH=mips
-make ARCH=ppc
+if [ ! -z "$ALL" ]; then
+  make ARCH=mips
+  make ARCH=ppc
+fi
 
 # Remove some programs that aren't needed in the distribution
 rm -f bin.*/{mfs_bitmap,mfs_findzero,mfs_getslice,mfs_poke,mfs_purge,sd-h400_unlock,mfs_dump}
@@ -38,8 +43,10 @@ rm -f bin.$MYARCH/{vserver,tserver,NowShowing,mfs_tzoffset}
 rm -f bin.{mips,ppc}/{vplay,vsplit}
 
 (cd ..; tar cvf - mfs_vplay_tserver/bin.$MYARCH | bzip2 -9 > $I386PKG)
-(cd ..; tar cvf - mfs_vplay_tserver/bin.mips | bzip2 -9 > $MIPSPKG)
-(cd ..; tar cvf - mfs_vplay_tserver/bin.ppc  | bzip2 -9 > $PPCPKG)
+if [ ! -z "$ALL" ]; then
+  (cd ..; tar cvf - mfs_vplay_tserver/bin.mips | bzip2 -9 > $MIPSPKG)
+  (cd ..; tar cvf - mfs_vplay_tserver/bin.ppc  | bzip2 -9 > $PPCPKG)
+fi
 
 make clean
 

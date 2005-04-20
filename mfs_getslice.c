@@ -4,7 +4,6 @@
   released under the Gnu GPL v2
 */
 
-#define _GNU_SOURCE
 #include "mfs.h"
 
 static int pull_files;

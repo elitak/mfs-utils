@@ -3,7 +3,6 @@
   tridge@samba.org, January 2001
   released under the Gnu GPL v2
 */
-#define _GNU_SOURCE
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
@@ -162,8 +161,8 @@ static void load_super(int fix)
 	}
 	if (!fix) {
 		check_crc((void *)&super, sizeof(super), &super.crc);
-	} else if (replace_crc((void *)&super, sizeof(super), &super.crc)) {
-		fprintf( stderr, "Replacing back CRC\n");
+	} else if (! replace_crc((void *)&super, sizeof(super), &super.crc)) {
+		fprintf( stderr, "Writing back corrected CRC\n");
 		mfs_write_partial(&super, 0, sizeof(super));
 	}
 	byte_swap(&super, "i9 b128 i17");

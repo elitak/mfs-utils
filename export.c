@@ -57,7 +57,7 @@ int export_file(const u32 fsid, const int fd, u64 start,
 		 u64 count, int delayms, u32 nbufs, int verbose )
 {
         struct mfs_inode inode;
-        int run;
+        int run, ret, rlen, blen;
         int pct, last_pct=0;
         u64 ofs=0, size;
 	u64 total;
@@ -91,8 +91,22 @@ int export_file(const u32 fsid, const int fd, u64 start,
 		fprintf(stderr,
 			"exporting fsid %d of size %lld starting at offset %lld for %lld bytes\n", 
 			fsid, size, start, count);
-
 	mfs_readahead(1);
+
+	// Special case for short files: data is in the inode itself.
+	if(inode.num_runs == 0) {
+		if (count > nb*SECTOR_SIZE) {
+			fprintf( stderr, "inode data too big for buffer!?  Output truncated.\n" );
+			count = nb*SECTOR_SIZE;
+		}
+		mfs_fsid_pread( fsid, buf, start, count );
+		ret  = writeall(fd,buf,count); //number of BYTES read
+		if (ret < 0 || ret != count) {
+			perror("write failed:");
+			return -1;
+		}
+		return count;
+	}
 
         for (run=0;count>0 && run<inode.num_runs;run++) {
                 int len=inode.u.runs[run].len;   //number of sectors left
@@ -103,7 +117,6 @@ int export_file(const u32 fsid, const int fd, u64 start,
 			continue; /* nyet */
 		}
                 while (len>0 && count>0) {
-			int rlen, blen, ret;
 			if (start > ofs) {
 				// Find first sector we want
 				int bofs = start-ofs;
@@ -114,8 +127,7 @@ int export_file(const u32 fsid, const int fd, u64 start,
 				sec += sofs;
 				// Partial first sector
 				if (bmod) {
-					int blen = MIN(SECTOR_SIZE-bmod,count);
-					int ret;
+					blen = MIN(SECTOR_SIZE-bmod,count);
 					mfs_read_sectors(buf,sec,1);
 					ret = writeall( fd, buf+bmod, blen);
 					if (ret <= 0) {

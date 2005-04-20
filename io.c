@@ -10,7 +10,6 @@
    See JPB comments
    licensed Gnu GPL vs
 */
-#define _GNU_SOURCE
 #include <stdlib.h>
 #include <ctype.h>
 #include "mfs.h"

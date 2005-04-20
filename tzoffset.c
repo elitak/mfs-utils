@@ -45,14 +45,14 @@ int tzoffset()
 
 	if (tzoff != INT_MAX) return tzoff;
 	fsid = mfs_resolve( "/State/LocationConfig" );
-	if (fsid >= 0) {
+	if (fsid > 0) {
 		u32 size = mfs_fsid_size(fsid);
 		char *buf=alloca(size);
 		mfs_fsid_pread(fsid, buf, 0, size );
 		parse_object(fsid, buf, callback);
 	} else {
 	  fsid = mfs_resolve( "/Setup" );
-	  if (fsid >= 0) {
+	  if (fsid > 0) {
 		  u32 size = mfs_fsid_size(fsid);
 		  char *buf=alloca(size);
 		  mfs_fsid_pread(fsid, buf, 0, size );

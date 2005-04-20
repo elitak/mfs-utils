@@ -1,1 +1,0 @@
-Jamie	Regenerate the mfs_ftp patches in a form the busybox patch program likes.

@@ -42,7 +42,13 @@ static void unlock_byte(int fd, int b)
 	}
 }
 
-enum {LOCK_READ=0, LOCK_WRITE=1};
+#ifndef LOCK_READ
+#define LOCK_READ 0
+#endif
+
+#ifndef LOCK_WRITE
+#define LOCK_WRITE 1
+#endif
 
 static int vserver(int fd)
 {

@@ -5,8 +5,8 @@
 */
 
 #include "mfs.h"
-#include <netinet/tcp.h>
 #include <unistd.h>
+#include <netinet/tcp.h>
 
 #ifdef TIVO_S1
 #include <asm/unistd.h>

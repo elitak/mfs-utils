@@ -1,3 +1,0 @@
-Jamie	Make CommercialSkipOffset optional in generate_xml().
-
-Jamie   Add -r and -f options to mfs_dumpobj  for recursive dumping of MFS trees.

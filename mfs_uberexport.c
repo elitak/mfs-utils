@@ -3,9 +3,6 @@
   tridge@samba.org, January 2001
   released under the Gnu GPL v2
 */
-
-#define _GNU_SOURCE
-
 #include <assert.h>
 #include <string.h>
 #include <stdarg.h>
@@ -142,21 +139,25 @@ int main(int argc, char *argv[])
 
 	// Sanity check args
 	if (!showPath && argc <1) {
+		usage();
 		fprintf( stderr, "%s Command line error: The command line must include a path or fsid.\n", 
 			 prog );
 		exit(1);
 	}
 	if ( xmlonly && !showPath ) {
+		usage();
 		fprintf( stderr, "%s Command line error: The -X option only makes sense when combined with -R\n", 
 			 prog );
 		exit(1);
 	}
 	if (showPath && argc!=0) {
+		usage();
 		fprintf( stderr, "%s Command line error: The -R option only makes sense with a single path/fsid\n", 
 			 prog );
 		exit(1);
 	}
 	if ( (start!=0 || count!=0) && (showPath || argc>1) ) {
+		usage();
 		fprintf( stderr, "%s Command line error: The -s and -c option are only supported with a single path/fsid\n", 
 			 prog );
 		exit(1);
