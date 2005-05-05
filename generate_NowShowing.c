@@ -241,7 +241,7 @@ generate_1_NowShowing(int fsid, char *ret, unsigned retsize)
 	unsigned size;
 
 	if ( fsid<=0  || mfs_fsid_type(fsid) != MFS_TYPE_OBJ) {
-		fprintf(stderr, "Bad recording id: %d  type: %d\n", fsid, 
+		fprintf(stderr, "Bad recording id: %d  type: %s\n", fsid, 
 			(fsid<=0)? "*bad fsid*" : mfs_fsid_type(fsid) );
 		return 0;
 	}
