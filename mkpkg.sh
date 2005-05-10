@@ -11,21 +11,21 @@ DATESTR=`date +'%Y%m%d'`
 # Add a letter if we've already built a package today
 MOD=
 MODINDX=1
-SRCPKG=$TMPDIR/mfs_src-$DATESTR$MOD.tar.bz2
+SRCPKG=$TMPDIR/mfs-utils_src-$DATESTR$MOD.tar.bz2
 while [ -e $SRCPKG ]; do
   MOD=`expr substr "abcdefghijklmnopqrstuvwxyz" $MODINDX 1`;
   MODINDX=$[$MODINDX+1];
-  SRCPKG=$TMPDIR/mfs_src-$DATESTR$MOD.tar.bz2
+  SRCPKG=$TMPDIR/mfs-utils_src-$DATESTR$MOD.tar.bz2
 done
 
-NOARCHPKG=$TMPDIR/mfs_noarch-$DATESTR$MOD.tar.bz2
-MIPSPKG=$TMPDIR/mfs_bin.mips-$DATESTR$MOD.tar.bz2
-PPCPKG=$TMPDIR/mfs_bin.ppc-$DATESTR$MOD.tar.bz2
-I386PKG=$TMPDIR/mfs_bin.$MYARCH-$DATESTR$MOD.tar.bz2
+NOARCHPKG=$TMPDIR/mfs-utils_noarch-$DATESTR$MOD.tar.bz2
+MIPSPKG=$TMPDIR/mfs-utils_bin.mips-$DATESTR$MOD.tar.bz2
+PPCPKG=$TMPDIR/mfs-utils_bin.ppc-$DATESTR$MOD.tar.bz2
+I386PKG=$TMPDIR/mfs-utils_bin.$MYARCH-$DATESTR$MOD.tar.bz2
 
 make clean
-(cd ..; tar cvf - --exclude CVS mfs_vplay_tserver | bzip2 -9 > $SRCPKG)
-(cd ..; shopt -s nullglob; tar cvf - mfs_vplay_tserver/{,contrib/}{*.txt,README*,*.patch} | bzip2 -9 >$NOARCHPKG)
+(cd ..; tar cvf - --exclude CVS mfs-utils | bzip2 -9 > $SRCPKG)
+(cd ..; shopt -s nullglob; tar cvf - mfs-utils/{,contrib/}{*.txt,README*,*.patch} | bzip2 -9 >$NOARCHPKG)
 
 if [ `uname` = Darwin ] ; then
 make
@@ -42,10 +42,10 @@ rm -f bin.*/{mfs_bitmap,mfs_findzero,mfs_getslice,mfs_poke,mfs_purge,sd-h400_unl
 rm -f bin.$MYARCH/{vserver,tserver,NowShowing,mfs_tzoffset,vplay,vplit,vplayer}
 rm -f bin.{mips,ppc}/{vplay,vsplit}
 
-(cd ..; tar cvf - mfs_vplay_tserver/bin.$MYARCH | bzip2 -9 > $I386PKG)
+(cd ..; tar cvf - mfs-utils/bin.$MYARCH | bzip2 -9 > $I386PKG)
 if [ ! -z "$ALL" ]; then
-  (cd ..; tar cvf - mfs_vplay_tserver/bin.mips | bzip2 -9 > $MIPSPKG)
-  (cd ..; tar cvf - mfs_vplay_tserver/bin.ppc  | bzip2 -9 > $PPCPKG)
+  (cd ..; tar cvf - mfs-utils/bin.mips | bzip2 -9 > $MIPSPKG)
+  (cd ..; tar cvf - mfs-utils/bin.ppc  | bzip2 -9 > $PPCPKG)
 fi
 
 make clean
