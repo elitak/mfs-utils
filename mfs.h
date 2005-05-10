@@ -219,6 +219,7 @@ struct bitmap {
 #define MFS_CMD_READ 1
 #define MFS_CMD_WRITE 2
 #define MFS_CMD_ZERO 3
+#define MFS_CMD_LIST_SECTORS 0100
 
 #ifndef MIN
 #define MIN(a,b) ((a)<(b)?(a):(b))
@@ -226,6 +227,19 @@ struct bitmap {
 
 typedef void (*object_fn)(int fsid, struct mfs_subobj_header *obj, 
                           struct mfs_attr_header *attr, void *data);
+
+/*******************************************************************************
+    For io.c:mfs_list_sectors()
+*******************************************************************************/
+
+typedef struct run_desc_t {
+  u32 drive;			/* drive number 0:Adrive 1:Bdrive */
+  u32 partition;		/* partition number */
+  u32 start;			/* start sector */
+  u32 count;			/* number of sectors */
+} run_desc;
+
+
 
 #include "proto.h"
 

@@ -5,6 +5,7 @@
 */
 
 #include "mfs.h"
+#include "log.h"
 
 #define MAX_PARTITIONS 20
 #define PARTITION_MAGIC	0x504d

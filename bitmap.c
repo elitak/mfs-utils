@@ -1,4 +1,5 @@
 #include "mfs.h"
+#include "log.h"
 
 /****************************************************************************
 allocate a bitmap of the specified size

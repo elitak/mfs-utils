@@ -118,7 +118,7 @@ static void dump_callback(int fsid, struct mfs_subobj_header *obj,
 			queue_add(fsid);
 			printf("%d/%d ",
 			       fsid,
-			       ntohl(objattr->subobj));
+			       (int) ntohl(objattr->subobj));
 			objattr++;
 		}
 		break;

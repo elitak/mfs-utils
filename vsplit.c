@@ -66,8 +66,6 @@ static void usage(void)
 	char *fname;
 	int fd;
 	unsigned char buf[CHUNK_SIZE];
-	extern char *optarg;
-	extern int optind;
 	int c;
 
 	while ((c = getopt(argc, argv, "vh")) != -1 ){

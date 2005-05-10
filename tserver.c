@@ -17,6 +17,29 @@
 // From the MFS_stream code. We are now using this as it seems to work better.
 //
 #include "mfs.h"
+
+//
+// usage - Print out the usage as seperate lines. Save the deprecation warnings.
+//
+void usage(void)
+{
+	printf("tserver_mfs [options]\n");
+	printf("Version: 1.3-20050428\n");
+	printf("options:\n");
+	printf("    -n  No Priority Change (Stay at higher priority...)\n");
+        printf("    -d <path> DeleteShowing tivosh script to use instead of the internal script\n");
+        printf("    -s <path> NowShowing tivosh script to use instead of the internal code.\n"
+	       "              Also used for DeleteScript, unless overriden with -d\n");
+	printf("    -l  Send messages to syslog\n");
+	printf("    -L  Send all messages to syslog\n");
+	printf("    -i  inetd mode. Use this in inetd.conf.\n");
+	printf("    -h  help\n");
+	credits();
+	exit(1);
+}
+
+#include "log.h"
+
 int verbose = 0;
 
 int	SetupClientSocket(char *Servername, int ServerPort);
@@ -70,23 +93,6 @@ int myAtoi(char *s)
 	return(r);
 }
 
-
-//
-// usage - Print out the usage as seperate lines. Save the deprecation warnings.
-//
-void usage(void)
-{
-	printf("tserver_mfs [options]\n");
-	printf("Version: 1.2-20041212\n");
-	printf("options:\n");
-	printf("    -n  No Priority Change (Stay at higher priority...)\n");
-        printf("    -d <path> DeleteShowing tivosh script to use instead of the internal script\n");
-        printf("    -s <path> NowShowing tivosh script to use instead of the internal code.\n"
-	       "              Also used for DeleteScript, unless overriden with -d\n");
-	printf("    -h  help\n");
-	credits();
-	exit(1);
-}
 
 
 
@@ -257,34 +263,49 @@ int
 main(int argc, char *argv[])
 {
 	char			buf[CMD_SIZE];			// Command we read from the socket.
-	int			ns;				// New socket descriptor
+	int			ns = -1;			// New socket descriptor
 	int			len;
 	
 	struct sockaddr		client_sa;			// Data structure for the address of the client entity
 	struct sockaddr_in	sa_in;				// Structure for address of the server entity.
 
-	extern char		*optarg;
-	extern int		optind;
 	int			doPri = 1;			// By default change the priority.
 	int			reuseAddr;
-	int                     c, fd;
+	int                     c, fd, inetd = 0;
 
-	while ((c = getopt(argc, argv, "nd:s:")) != -1)
+	while ((c = getopt(argc, argv, "nd:s:lLih?")) != -1)
 	{
 		switch (c)
 		{
 			case 'n':	doPri=0;	break;	// Don't change priority.
+
  		        case 'd':       script_DeleteShowing=optarg;  break;
  		        case 's':       script_NowShowing=optarg;  break;
+			case 'l':	setup_syslog(1); break;
+			case 'L':	setup_syslog(2); break;
+			case 'i':	inetd=1;	break;
 			default:	usage();	exit(1);
 		}
 	}
 	
 	argc -= optind; argv += optind;
-	
+
 	if (argc != 0)
 	{
 		usage();
+	}
+
+	if (inetd) {
+		// If started by inetd, stdin+stdout+stderr are all connected
+		// to the socket. Here we keep just stdin (fd=0).
+		int logfd;
+		logfd= open("/dev/null", O_WRONLY|O_CREAT|O_TRUNC, 0644);
+		if (logfd==-1) exit(2);
+		dup2(logfd,1);
+		close(logfd);
+		dup2(1,2);
+		sd = dup(0);
+		close(0);
 	}
 
 	/* Check NowSHowing script */
@@ -318,6 +339,7 @@ main(int argc, char *argv[])
 	{
 		printf("Doing the Lowest PriorityFix...\n");
 		fixPriority(1);				// Force ourselves to a low priority to keep the Tivo from skipping.
+
 	}
 	else
 	{
@@ -327,27 +349,28 @@ main(int argc, char *argv[])
 
 	mfs_init();						// Turn on the mfs code so we can read these as we go.
 
-
-	sd = socket(AF_INET,SOCK_STREAM,0);			// Get a socket descriptor and make sure it is good.
-	if (sd<0)
-	{
+	if (!inetd) {
+	  sd = socket(AF_INET,SOCK_STREAM,0);			// Get a socket descriptor and make sure it is good.
+	  if (sd<0)
+	  {
 		perror("Can't open a socket\n");
 		exit(0);
-	}
+	  }
 
-	bzero(&sa_in, sizeof(sa_in));				// Bind the socket to an address.
-	sa_in.sin_addr.s_addr	= INADDR_ANY;			// And legal address in the server interface list.
-	sa_in.sin_port		= htons(0xded);			// on port 3565
-	sa_in.sin_family	= AF_INET;			// An inet family socket.
+	  bzero(&sa_in, sizeof(sa_in));				// Bind the socket to an address.
+	  sa_in.sin_addr.s_addr	= INADDR_ANY;			// And legal address in the server interface list.
+	  sa_in.sin_port	= htons(0xded);			// on port 3565
+	  sa_in.sin_family	= AF_INET;			// An inet family socket.
 
-	reuseAddr = 1;						// Be able to reopen an already running address.
-	setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, (void *)&reuseAddr, sizeof(int));
+	  reuseAddr = 1;					// Be able to reopen an already running address.
+	  setsockopt(sd, SOL_SOCKET, SO_REUSEADDR, (void *)&reuseAddr, sizeof(int));
 
-	if (bind(sd, (struct sockaddr *)&sa_in, sizeof(sa_in)))
-	{
+	  if (bind(sd, (struct sockaddr *)&sa_in, sizeof(sa_in)))
+	  {
 		perror("Bad binding in the server");
 		close(sd);
 		exit(0);
+	  }
 	}
 	
 	signal(SIGINT,onintr);					// Setup the ^C interrupts and other good ones to watch.
@@ -355,19 +378,24 @@ main(int argc, char *argv[])
 	signal(SIGTERM,onintr);
 	signal(SIGPIPE,write_error);
 	
-	listen(sd, 10);						// Set the listen queue, 10 can wait while we process the current.
+	if (!inetd)
+	  listen(sd, 10);					// Set the listen queue, 10 can wait while we process the current.
 	
 	for(;;)
 	{
 		int ret;
 		int i;
 		
-		printf("Waiting for an incoming connection!\n");
+		if (inetd) {
+		  ns = sd;
+		} else {
+		  printf("Waiting for an incoming connection!\n");
 		
-		ret = waitio (sd, 0);
-		if (ret != 1)	continue;			// Something went bad, so leave!
+		  ret = waitio (sd, 0);
+		  if (ret != 1)	continue;			// Something went bad, so leave!
 		
-		ns = accept(sd,&client_sa,&len);		// Wait here for a client to connect and make a request.
+		  ns = accept(sd,&client_sa,&len);		// Wait here for a client to connect and make a request.
+		}
 		bzero(buf, CMD_SIZE);
 		read(ns, &buf, CMD_SIZE);
 		
@@ -379,7 +407,7 @@ main(int argc, char *argv[])
 			else				break;
 		}
 
-		printf("SERVER: We got a message! buf = '%s'\n", buf);
+		logmsg("SERVER: We got a message! buf = '%s'\n", buf);
 		//
 		// CORE: Download a TyStream here...
 		//
@@ -417,6 +445,51 @@ main(int argc, char *argv[])
 			}
 */
 #endif
+		}
+		else if (!strncmp(buf, "LISTSECTORS", strlen("LISTSECTORS")))	
+		{
+			char	seps[]   = "/,";
+			char	*token;
+			int	FSIDs[100];
+			int	pos = 0;
+			int	fsid;
+
+			token = strtok( &(buf[strlen("LISTSECTORS")+1]), seps );
+			logmsg("token: %s", token);
+
+			while(token != NULL) // While there are still fsids to process..
+			{
+				int i,j;
+				char buf[128];
+				run_desc runs[1024];
+				int count;
+				printf("-> '%s'\n", token);
+
+				FSIDs[pos++] = myAtoi(token);
+
+				fsid = mfs_resolve(token);
+				j=snprintf(buf,sizeof(buf),"FSID:%d\n",fsid);
+				if(j<sizeof(buf))
+				  send(ns,buf,strlen(buf),0);
+				count = list_sectors_for_file(fsid, runs, 
+							      sizeof(runs)/sizeof(runs[0]));
+				if (count <0)
+					break; // Stop as soon as we have a problem.
+				for(i=0; i<count; i++) {
+					/* dump to buffer, then send buffer to client */
+					j=snprintf(buf,sizeof(buf),
+						   "DRV:%d PART:%d START:%d COUNT:%d\n",
+						   runs[i].drive, runs[i].partition,
+						   (int)runs[i].start, runs[i].count);
+					if(j<sizeof(buf))
+					{
+						send(ns,buf,strlen(buf),0);
+					}
+					
+				}
+				token = strtok(NULL, seps);
+			}
+
 		}
 		//
 		// CORE: Download a NowShowing list here...
@@ -536,7 +609,9 @@ main(int argc, char *argv[])
 		}
 		
 		close(ns);
+		if (inetd) break;
 	}
+	exit(0);
 }
 
 

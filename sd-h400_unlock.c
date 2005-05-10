@@ -50,7 +50,7 @@ static void unlock_callback(int fsid, struct mfs_subobj_header *obj,
         case TYPE_INT:
         case TYPE_FILE:
 		for (i=0;i<(attr->len-4)/4;i++) {
-			printf("%d ",ntohl(*(int *)&p[i*4]));
+			printf("%d ",(int)ntohl(*(int *)&p[i*4]));
 		}
 		if (strcmp(lasttype,"DiskPartition")==0) {
 			if (attrstr != 0 && strcmp(attrstr,"Id")==0) {
@@ -74,8 +74,8 @@ static void unlock_callback(int fsid, struct mfs_subobj_header *obj,
 		objattr = (struct mfs_obj_attr *)p;
                 for (i=0;i<(attr->len-4)/sizeof(*objattr);i++) {
                         printf("%d/%d ",
-			       ntohl(objattr->fsid),
-                               ntohl(objattr->subobj));
+			       (int)ntohl(objattr->fsid),
+                               (int)ntohl(objattr->subobj));
 			objattr++;
                 }
                 break;

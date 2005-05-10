@@ -69,7 +69,7 @@ BEGIN {
   next;
 }
 
-!/^u32|^u64|^OFF_T|^size_t|^off_t|^pid_t|^unsigned|^mode_t|^DIR|^user|^int|^char|^uint|^struct|^BOOL|^void|^time|^const/ {
+!/^u32|^u64|^OFF_T|^size_t|^off_t|^pid_t|^unsigned|^mode_t|^DIR|^user|^int|^char|^uint|^struct|^BOOL|^void|^time|^const|^run_desc/ {
   next;
 }
 

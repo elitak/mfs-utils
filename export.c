@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include "mfs.h"
+#include "log.h"
 
 
 // Write a complete buffer to a file descriptor, handling partial writes
@@ -176,5 +177,30 @@ int export_file(const u32 fsid, const int fd, u64 start,
                 }
         }
 	return total-count;
+}
+
+
+int list_sectors_for_file(const u32 fsid,  run_desc runs[], int maxruns )
+{
+	struct mfs_inode inode;
+	int run;
+	u64 size;
+
+	mfs_load_inode(fsid, &inode);
+	size = mfs_fsid_size(fsid);
+
+	// Special case for short files: data is in the inode itself.
+	if ( inode.num_runs == 0 )
+	{
+		// We dont process short files ... not sure how short inode support would would with burst!
+		fprintf(stderr, "LISTSECTORS was asked to list a short inode! Not supported.");
+		return -1;
+	}
+
+	for ( run=0; run<inode.num_runs && run<maxruns; run++ )
+	{
+	  runs[run] = mfs_list_sectors( inode.u.runs[run].start, inode.u.runs[run].len  );
+	}
+	return run;
 }
 

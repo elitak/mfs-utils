@@ -1,12 +1,69 @@
+20050507
+
+Jamie
+
+	Added a mfs_burstcmds command line program that does the equivalent of
+	JB6783's php code.  Extended the vserver protocol slightly to
+	allow mfs_burstcmds to work through a vserver connection.
+
+	Include CYGWIN compiled binaries.  These are NOT intended to be
+	used with a directly attached disk.  There are well know issues
+	with attaching a tivo drive to a windows 2K or XP machine (the
+	boot blocks of the disk get clobberd.  Instead, use these
+	tools with a remote vserver:
+
+	On the tivo, run vserver, either directly or through inetd.
+
+	On a PC running a cygwin shell:
+
+	# Set the ip address of the tivo
+	export MFS_DEVLIST=":your-tivo-ip"
+
+	Then use mfs_uberexport, mfs_burstcmds, or other commands as though
+	the tivo drive was directly attached to your PC.
+	
+-----------------------------------------------------------------------------
+20050501
+
+JB6783
+	Add support for LIST_SECTORS tserver command: used with
+	contrib/burst/tserver.php to extract partition and sector info
+	for Series1 CacheCard burst mode transfers.
+
+-----------------------------------------------------------------------------
+20050429
+
+maxwells_daemon
+	New tserver/vserver -l and -L options.
+	-l sends error messages to the syslog. -L sends all messages.
+	So we don't have to rewrite everything, log.h redefines fprintf etc
+	to call syslog() if use_syslog is set - otherwise it runs fprintf as if
+	log.h weren't there.
+
+	New tserver/vserver -i option. This allows these programs to be started
+	on demand from inetd. stderr and stdout are written to /dev/null, so
+	it's probably best to use -l (or -L) too. inetd is available as part of
+	GNU InetUtils. A PPC port is available from here
+		http://homepage.ntlworld.com/maxwells.daemon/tivo/ports.html
+
+	Fix load_devs which generated an unterminated device name, so could
+	randomly crash.
+
+	Fix error message in generate_1_NowShowing, which probably would have
+	crashed.
+
+	Add usage message for vserver -h. Update usage message for tserver -h.
+-----------------------------------------------------------------------------
 20050419
 
 Jamie
 	Fix tzoffset bug that caused problems with tserver on UK tivo's.
 
-	Fix get_tivo_version() so it doesn't exit if the version is unavailable for some reason.
-	This allows mfs_uberexport to work even if /SwSystem/ACTIVE isn't present.
+	Fix get_tivo_version() so it doesn't exit if the version is
+	unavailable for some reason.  This allows mfs_uberexport to
+	work even if /SwSystem/ACTIVE isn't present.
 -----------------------------------------------------------------------------
-20050326
+	20050326
 
 Jamie
 	Merge CHANGES into a single file.

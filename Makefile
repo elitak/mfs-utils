@@ -17,7 +17,7 @@ PREFIX=powerpc-TiVo-linux-
 CFLAGS += -DTIVO -DTIVO_S1
 EXTRABINS = contrib/s1_unscramble
 else
-# ARCH is mips or native (assuming kernel/glibc largefile support on 
+# ARCH is mips or native (assuming kernel/glibc largefile support)
 CFLAGS += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE 
 ifeq ($(ARCH),mips)
 # ARCH is mips
@@ -31,6 +31,9 @@ ifeq ($(ARCH),Darwin-Power-Macintosh)
 CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
 else
 CFLAGS += -DNEED_ALLOCA_H
+ifeq ($(findstring CYGWIN,$(ARCH)),CYGWIN)
+CFLAGS += -DNEED_STRNDUPA -DNEED_STRDUPA
+endif
 endif
 endif
 endif
@@ -64,11 +67,11 @@ endif
 
 COMMON = mfs.c object.c util.c bitmap.c io.c partition.c \
 	crc.c pri.c export.c schema.c query.c tzoffset.c tar.c \
-	credits.c read_xml.c generate_xml.c generate_NowShowing.c attribute.c
+	credits.c read_xml.c generate_xml.c generate_NowShowing.c attribute.c log.c
 
 BINS = \
  mfs_info mfs_ls mfs_streams mfs_dumpobj mfs_dumpschema mfs_tzoffset \
- mfs_import mfs_uberexport                              \
+ mfs_import mfs_uberexport mfs_burstcmds                \
  mfs_export mfs_stream mfs_tarstream mfs_tmfstream      \
  tserver vserver NowShowing ciphercheck                 \
  vplay                                                  \
@@ -101,7 +104,7 @@ proto.h: $(COMMON)
 .PRECIOUS : $(OBJDIR)/%.o
 
 
-$(OBJDIR)/%.o : %.c mfs.h 
+$(OBJDIR)/%.o : %.c mfs.h log.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BINDIR)/% : $(OBJDIR)/%.o $(TRIDGE_MFS_LIB)

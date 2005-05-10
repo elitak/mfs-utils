@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include "mfs.h"
+#include "log.h"
 
 static struct mfs_super super;
 static struct mfs_zone_map *zones[MAX_ZONES];

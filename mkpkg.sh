@@ -39,7 +39,7 @@ fi
 
 # Remove some programs that aren't needed in the distribution
 rm -f bin.*/{mfs_bitmap,mfs_findzero,mfs_getslice,mfs_poke,mfs_purge,sd-h400_unlock,mfs_dump}
-rm -f bin.$MYARCH/{vserver,tserver,NowShowing,mfs_tzoffset}
+rm -f bin.$MYARCH/{vserver,tserver,NowShowing,mfs_tzoffset,vplay,vplit,vplayer}
 rm -f bin.{mips,ppc}/{vplay,vsplit}
 
 (cd ..; tar cvf - mfs_vplay_tserver/bin.$MYARCH | bzip2 -9 > $I386PKG)

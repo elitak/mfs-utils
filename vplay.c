@@ -77,8 +77,6 @@ static void usage(void)
 	int chunk=0, count=0;
 	char *vidfile;
 	int playback = 0;
-	extern char *optarg;
-	extern int optind;
 	int c;
 	int audio_fd=-1, video_fd=-1;
 

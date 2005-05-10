@@ -1,6 +1,5 @@
 /*
-  media-filesystem library, io routines
-  tridge@samba.org, January 2001
+  media-filesystem library, io routines tridge@samba.org, January 2001
   released under the Gnu GPL v2
 */
 
@@ -13,6 +12,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "mfs.h"
+#include "log.h"
 
 static int readahead_enabled;
 static int vserver = -1;
@@ -32,6 +32,16 @@ static void vserver_read_req(u32 sec, u32 count)
 	struct vserver_cmd cmd;
 
 	cmd.command = htonl(MFS_CMD_READ);
+	cmd.param1 = htonl(sec);
+	cmd.param2 = htonl(count);
+	write_all(vserver, &cmd, sizeof(cmd));
+}
+
+static void vserver_list_sectors_req(u32 sec, u32 count)
+{
+	struct vserver_cmd cmd;
+
+	cmd.command = htonl(MFS_CMD_LIST_SECTORS);
 	cmd.param1 = htonl(sec);
 	cmd.param2 = htonl(count);
 	write_all(vserver, &cmd, sizeof(cmd));
@@ -119,6 +129,18 @@ static void vserver_write_sectors(void *buf, u32 sec, u32 count)
 	write_all(vserver, buf, count*SECTOR_SIZE);
 }
 
+static run_desc vserver_list_sectors( u32 sec, u32 count)
+{
+	run_desc retval;
+	vserver_list_sectors_req(sec,count);
+	read_all( vserver, &retval, sizeof(retval) );
+	retval.drive = ntohl(retval.drive);
+	retval.partition = ntohl(retval.partition);
+	retval.start = ntohl(retval.start);
+	retval.count = ntohl(retval.count );
+	return retval;
+}
+
 static void vserver_zero_sectors(u32 sec, u32 count)
 {
 	struct vserver_cmd cmd;
@@ -178,6 +200,60 @@ void mfs_read_sectors(void *buf, u32 sec, u32 count)
 	}
 }
 
+/** Assumes the run is entirely on one device.  */
+run_desc mfs_list_sectors(u32 sec, u32 count)
+{
+	int i,k;
+	int base=1;
+	char a='a';
+	char zero='0';
+	char nine='9';
+	u64 start=0;
+	run_desc retval = {0};
+
+	if (vserver != -1) {
+		return vserver_list_sectors(sec, count);
+	}
+
+	sec = partition_remap(sec);
+	for ( i=0; devs[i].dev; i++ )
+	{
+		if ( sec < start + devs[i].sectors ) break;
+		start += devs[i].sectors;
+	}
+	if ( !devs[i].dev )
+	{
+		fprintf(stderr,"Failed to map sector %d\n", sec);
+		return retval;
+	}
+	retval.start = sec - start;
+	if ( verbose )
+	{
+		fprintf(stderr, "Mapped %d to %s/%d count(%d)\n", 
+			sec, devs[i].dev, (int)(sec-retval.start), count);
+	}
+
+	/* parse out the partition number from the dev string...*/
+	retval.partition = 0;
+	for(k=strlen(devs[i].dev)-1; k>=0; k--)
+	{
+		if(devs[i].dev[k] >= zero && devs[i].dev[k] <= nine)
+		{      
+			retval.partition +=
+				(( devs[i].dev[k] - zero ) * base);
+			base=base*10;
+		}
+		else
+			break;
+	}
+	/* parse the drive letter from /dev/hdXNN */
+	if(k>=0)
+	{
+		retval.drive=( devs[i].dev[k] - a );
+	}
+	retval.count = count;
+	return retval;
+}
 
 /* write to the virtual tivo disk (ie. all partitions 
    concatenated) */
@@ -301,6 +377,7 @@ void load_devs(char *devlist, char *xlist[], int nxlist)
 			devs[i].dev = (char *) malloc( l + (ep-p1) +1 );
 			strncpy( devs[i].dev, xlist[xi], l );
 			strncpy( devs[i].dev+l, p1, (ep-p1) );
+                        devs[i].dev[l+(ep-p1)]= '\0';
 		} else {
 			devs[i].dev = strndup(devlist,len);
 		}
@@ -414,3 +491,14 @@ int io_get_need_bswap(void)
 {
 	return need_bswap;
 }
+
+
+
+
+
+
+
+
+
+
+

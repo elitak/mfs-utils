@@ -8,6 +8,7 @@
 #include <assert.h>
 #include "mfs.h"
 #include "attribute.h"
+#include "log.h"
 
 int 
 get_attribute( void *buf, unsigned size, const char *target_subobj_name, 

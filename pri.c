@@ -6,6 +6,7 @@
 #define _STRUCT_TIMESPEC
 #include <sched.h>
 #include <unistd.h>
+#include "log.h"
 
 #ifdef TIVO_S1
 //#include <asm/unistd.h>

@@ -5,6 +5,7 @@
 */
 #include <assert.h>
 #include "preload_schema.h"
+#include "log.h"
 
 static const char **types = 0;
 static int ntypes=0;

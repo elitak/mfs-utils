@@ -5,6 +5,7 @@
 */
 
 #include "mfs.h"
+#include "log.h"
 #include <unistd.h>
 #include <netinet/tcp.h>
 

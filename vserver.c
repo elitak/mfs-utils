@@ -7,6 +7,24 @@
 
 #include "mfs.h"
 
+//
+// usage - Print out the usage as seperate lines. Save the deprecation warnings.
+//
+void usage(void)
+{
+	printf("vserver_mfs [options]\n");
+	printf("Version: 1.3-20050428\n");
+	printf("options:\n");
+	printf("    -l  Send messages to syslog\n");
+	printf("    -L  Send all messages to syslog\n");
+	printf("    -i  inetd mode. Use this in inetd.conf.\n");
+	printf("    -h  help\n");
+	credits();
+	exit(1);
+}
+
+#include "log.h"
+
 #define CHUNK_SIZE	(256*1024)
 #define CHUNK_BLOCKS	(CHUNK_SIZE >> SECTOR_SHIFT)
 
@@ -57,6 +75,7 @@ static int vserver(int fd)
 	int window = 32768;
 	char fname[40];
 	int lock_fd;
+	run_desc retval;
 
 	void lock(int type, int v) {
 		if (v) {
@@ -98,6 +117,19 @@ static int vserver(int fd)
 			}
 			break;
 
+		case MFS_CMD_LIST_SECTORS:
+			lock(LOCK_WRITE, 1);
+			lock(LOCK_READ, 0);
+			blk = htonl(cmd.param1);
+			nblk = htonl(cmd.param2);
+			retval = mfs_list_sectors( blk, nblk);
+			retval.drive = ntohl(retval.drive);
+			retval.partition = ntohl(retval.partition);
+			retval.start = ntohl(retval.start);
+			retval.count = ntohl(retval.count );
+			write_all(fd, &retval, sizeof(retval) );
+			break;
+		
 		case MFS_CMD_WRITE:
 			blk = ntohl(cmd.param1);
 			nblk = ntohl(cmd.param2);
@@ -166,6 +198,44 @@ static int open_socket_in(int type, int port, unsigned socket_addr)
  int main(int argc, char *argv[])
 {
 	int sock;
+	int c, inetd = 0;
+
+	while ((c = getopt(argc, argv, "lLih?")) != -1)
+	{
+		switch (c)
+		{
+			case 'l':	setup_syslog(1); break;
+			case 'L':	setup_syslog(2); break;
+			case 'i':	inetd=1;	break;
+			default:	usage();	exit(1);
+		}
+	}
+	
+	argc -= optind; argv += optind;
+
+	if (argc != 0)
+	{
+		usage();
+	}
+
+	if (inetd) {
+		// If started by inetd, stdin+stdout+stderr are all connected
+		// to the socket. Here we keep just stdin (fd=0).
+		int logfd;
+		logfd= open("/dev/null", O_WRONLY|O_CREAT|O_TRUNC, 0644);
+		if (logfd==-1) exit(2);
+		dup2(logfd,1);
+		close(logfd);
+		dup2(1,2);
+		sock = dup(0);
+		close(0);
+
+		signal(SIGCHLD, SIG_IGN);
+		mfs_init();
+		logmsg("starting vserver\n");
+		vserver(sock);
+		return 0;
+	}
 
 	sock = open_socket_in(SOCK_STREAM, VSERVER_PORT, INADDR_ANY);
 
@@ -178,7 +248,7 @@ static int open_socket_in(int type, int port, unsigned socket_addr)
 
 	mfs_init();
 
-	printf("waiting for connections on port %d\n", VSERVER_PORT);
+	logmsg("waiting for connections on port %d\n", VSERVER_PORT);
 
 	while (1) {
 		struct sockaddr addr;

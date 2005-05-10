@@ -20,7 +20,9 @@
 
 #include "mfs.h"
 
+#ifdef MSG_WAITALL
 static 	int use_recv = 1;
+#endif
 
 static inline ssize_t readall( int fd, void *buf, size_t count ) 
 {
