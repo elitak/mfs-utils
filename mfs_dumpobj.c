@@ -14,6 +14,9 @@ int option_local = 0;
 static int tzoff = 0;
 static int last = 0;
 
+// Forward reference
+static void dumpobj(int fsid, int fileobj, int recurse, const char *path);
+
 //
 // Queue of referenced fsid's to dump out after the referencing object
 //
@@ -24,6 +27,21 @@ static int nq = 0;
 static void queue_add(int fsid) {
 	assert(nq < MAX_QUEUE);
 	fsid_queue[nq++] = fsid;
+}
+
+static void process_queue(int recurse, int fileobj)
+{
+	if (recurse) {
+		int i;
+		int n = nq;
+		int *q = alloca( n*sizeof(int) );
+		assert(q);
+		memcpy( q, fsid_queue, n*sizeof(int) );
+		nq = 0;
+		for(i=0; i<n; i++)
+			dumpobj( q[i], fileobj, 1, "" );
+	} else
+		nq = 0;
 }
 
 
@@ -165,10 +183,10 @@ static void free_hash() {
 //
 // Dump a buffer in hex
 //
-static void hexdump( char *buf, unsigned len) {
+static void hexdump( char *buf, unsigned addroff, unsigned len) {
 	int i, j;
 	for(i=0; i<len; ) {
-		printf( "%08x", i );
+		printf( "%08x", i+addroff );
 		for(j=0; j<8 && i<len-1; j++, i+=2) {
 			printf( " %04x", *((u16 *)(buf+i)));
 		}
@@ -180,13 +198,17 @@ static void hexdump( char *buf, unsigned len) {
 	}
 }
 
+
 static void dumpobj(int fsid, int fileobj, int recurse, const char *path)
 {
-	int i;
 	void *buf;
 	u32 size;
 	int type;
 	if (seen_before(fsid)) return;
+	if (! mfs_valid_fsid(fsid)) {
+	  fprintf( stderr, "Skipping invalid fsid: %d\n", fsid );
+	  return;
+	}
 
 	type = mfs_fsid_type(fsid);
 	switch (type) {
@@ -216,12 +238,22 @@ static void dumpobj(int fsid, int fileobj, int recurse, const char *path)
 
 	case MFS_TYPE_FILE:
 		if (fileobj) {
+			u32 off = 0;
+			const u32 bsize = 128*1024;
 			printf( "tyFile %d {\n", fsid );
 			// hex dump,
 			size = mfs_fsid_size(fsid);
-			buf = alloca(size);
-			mfs_fsid_pread(fsid, buf, 0, size);
-			hexdump( buf, size );
+			buf = alloca( bsize );
+			if (buf) {
+				for(off=0; off<size; off+= bsize) {
+					int l = size-off;
+					if (l > bsize) l = bsize;
+					mfs_fsid_pread(fsid, buf, off, bsize);
+					hexdump( buf, off, bsize );
+				}
+			} else {
+				fprintf( stderr, "memory allocation failed allocating %d bytes for fsid: %d\n", size, fsid );
+			}
 			printf("}");
 		}
 		break;
@@ -234,18 +266,10 @@ static void dumpobj(int fsid, int fileobj, int recurse, const char *path)
 		last = 0;
 		parse_object(fsid, buf, dump_callback);
 		printf("}\n");
-		if (recurse) {
-			int n = nq;
-			int *q = alloca( n*sizeof(int) );
-			assert(q);
-			memcpy( q, fsid_queue, n*sizeof(int) );
-			nq = 0;
-			for(i=0; i<n; i++)
-				dumpobj( q[i], fileobj, 1, "" );
-		} else
-			nq = 0;
+		process_queue(recurse, fileobj);
 	}
 }
+
 
 
 static void usage(void)

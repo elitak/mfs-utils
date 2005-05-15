@@ -232,6 +232,23 @@ static u32 zone_sector(u32 hash)
 	exit(1);
 }
 
+/* Check an fsid for validity. */
+int mfs_valid_fsid(int fsid)
+{
+	struct mfs_inode in;
+	unsigned hash, hash1;
+
+	hash1 = hash = fsid_hash(fsid, total_inodes);
+	do {
+		mfs_read_partial(&in, zone_sector(hash), sizeof(in));
+		check_crc( &in, sizeof(in), &in.crc );
+		byte_swap(&in, "i10 b2 s1 i4");
+		hash = (hash+1) % total_inodes;
+	} while ((in.flags & MFS_FLAGS_CHAIN) && in.id != fsid && hash != hash1);
+	
+	return (in.id == fsid);
+}
+
 /* load one inode by fsid - optimised to avoid repeats */
 void mfs_load_inode(int fsid, struct mfs_inode *inode)
 {
