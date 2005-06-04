@@ -14,6 +14,21 @@
 #include "mfs.h"
 #include "log.h"
 
+#ifdef linux
+#include <linux/fs.h>
+#else
+#ifdef __CYGWIN__
+#include <cygwin/fs.h>
+#else
+#ifdef __MACH__
+#include <sys/disk.h>
+#ifndef BLKGETSIZE
+#define BLKGETSIZE DKIOCGETBLOCKCOUNT32
+#endif
+#endif
+#endif
+#endif
+
 static int readahead_enabled;
 static int vserver = -1;
 static int need_bswap;
@@ -161,7 +176,7 @@ static struct {
 	char *dev;
 	unsigned long sectors;
 	int fd;
-} devs[MAX_DEVS];
+} devs[MAX_DEVS] = {{0}};
 
 static unsigned count_devs; /*JPB*/
 
@@ -336,15 +351,22 @@ u32	dev_start_sector(u32 dev_no)
 
 
 /* initialise the devices list from the superblock devlist */
-void load_devs(char *devlist, char *xlist[], int nxlist)
+void load_devs(char *devlist, char *xlist[], int nxlist, int mode)
 {
 	char *p;
 	int i=0, xi, len;
+	int bsddevname;
+
+	// Close any previously opened devices
+	for (i=0; devs[i].dev; i++)
+		close(devs[i].fd);
+	i=0;
 
 	if (dev_list) {
 		devlist = dev_list;
 		xlist = 0;
-	}
+	} else
+	  clear_use_ptable();
 
 	if (vserver != -1) return;
 
@@ -368,23 +390,32 @@ void load_devs(char *devlist, char *xlist[], int nxlist)
 				p1--;
 			p1++;
 
-			// strip partition digits from xlist[xi]
-			l=strlen(xlist[xi]);
-			while(l>0 && isdigit(xlist[xi][l-1]))
-				l--;
+			bsddevname = 
+			  strncmp(xlist[xi],"/dev/disk",9)==0 ||
+			  strncmp(xlist[xi],"/dev/rdisk",10)==0;
 
+			l=strlen(xlist[xi]);
+			if (!bsddevname) {
+				// strip partition digits from xlist[xi]
+				while(l>0 && isdigit(xlist[xi][l-1]))
+					l--;
+			}
 			// Assemble device string
-			devs[i].dev = (char *) malloc( l + (ep-p1) +1 );
+			devs[i].dev = (char *) malloc( l + (ep-p1) +2 );
 			strncpy( devs[i].dev, xlist[xi], l );
+			// check for bsd/OS X style disk partition devices
+			if (bsddevname)
+			  devs[i].dev[l++]='s'; 
 			strncpy( devs[i].dev+l, p1, (ep-p1) );
                         devs[i].dev[l+(ep-p1)]= '\0';
 		} else {
 			devs[i].dev = strndup(devlist,len);
 		}
 
-		devs[i].fd = open(devs[i].dev, O_RDWR|O_LARGEFILE);
+		devs[i].fd = open(devs[i].dev, mode);
 		if (devs[i].fd == -1) {
 			fprintf(stderr, "failed to open [%s]\n", devs[i].dev);
+			perror("perror:");
 			break;
 		}
 		devs[i].sectors = ll_seek(devs[i].fd, 0, SEEK_END) >> SECTOR_SHIFT;

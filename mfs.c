@@ -104,7 +104,7 @@ static void load_super(int fix)
 				}
 			}
 		}
-		load_devs( dev, 0, 0 );
+		load_devs( dev, 0, 0,  O_RDONLY|O_LARGEFILE);
 		fd = open(dev, O_RDONLY|O_LARGEFILE);
 		if (fd < 0) {
 			fprintf( stderr, "couldn't open %s", dev );
@@ -160,6 +160,11 @@ static void load_super(int fix)
 	{
 		fprintf(stderr, "Warning: filesystem is inconsistent. Run fsfix and mfscheck ASAP\n");
 	}
+
+	// fill out the partition table with the list from the superblock
+	
+	load_devs(super.devlist, xlist, nxlist, O_RDWR|O_LARGEFILE);
+
 	if (!fix) {
 		check_crc((void *)&super, sizeof(super), &super.crc);
 	} else if (! replace_crc((void *)&super, sizeof(super), &super.crc)) {
@@ -172,10 +177,6 @@ static void load_super(int fix)
 		fprintf(stderr,"Failed to byte swap correctly\n");
 		exit(1);
 	}
-
-	// fill out the partition table with the list from the superblock
-	
-	load_devs(super.devlist, xlist, nxlist);
 	
 	if (io_total_size() && io_total_size() != super.total_sectors) {
 		fprintf(stderr, "WARNING: total sectors doesn't match (total=%d sb=%d)\n",

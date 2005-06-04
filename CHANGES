@@ -1,3 +1,19 @@
+20050604
+
+Jamie
+	Fix device handling for OS_X:  use DKIOGETBLOCKCOUNT32 to get the
+	device sizes.  Handle bsd style disk device names (/dev/diskNsM...).
+
+-----------------------------------------------------------------------------
+
+20050515
+
+Jamie
+	Allow a recursive mfs_dumpobj to continue after running into 
+	invalid fsid references.
+
+-----------------------------------------------------------------------------
+
 20050512
 
 Jamie

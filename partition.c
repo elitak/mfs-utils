@@ -38,7 +38,7 @@ struct pmap {
 } pmaps[MAX_PARTITIONS];
 
 static int num_partitions;
-static int use_ptable;
+static int use_ptable = 0;
 
 /* parse the tivo partition table */
 void partition_parse(int fd)
@@ -117,4 +117,9 @@ u32 partition_total_size(void)
 	}
 
 	return total;
+}
+
+void clear_use_ptable()
+{
+	use_ptable = 0;
 }

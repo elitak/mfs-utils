@@ -54,14 +54,6 @@
 
 #define MFS_FLAGS_PRIMARY 0x2000
 
-#ifndef BLKGETSIZE
-#ifdef __i386__
-#define BLKGETSIZE 0x1260
-#else
-#define BLKGETSIZE 0x20001260
-#endif
-#endif
-
 #ifndef O_LARGEFILE
 
 #ifdef TIVO_S1
