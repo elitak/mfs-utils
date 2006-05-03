@@ -344,7 +344,7 @@ u32	dev_start_sector(u32 dev_no)
 	u32	start = 0;
 	
 	for (i = 0; i < dev_no; ++i) {
-		start += devs[dev_no].sectors;
+		start += devs[i].sectors;
 	}
 	return start;
 }

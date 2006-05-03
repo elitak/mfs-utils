@@ -41,7 +41,7 @@ static int num_partitions;
 static int use_ptable = 0;
 
 /* parse the tivo partition table */
-void partition_parse(int fd)
+void partition_parse()
 {
 	char buf[SECTOR_SIZE];
 	struct tivo_partition *tp;
@@ -49,20 +49,19 @@ void partition_parse(int fd)
 
 	tp = (struct tivo_partition *)buf;
 
-	read_sectors(fd, tp, 1, 1);
-
-	count = ntohl(tp->map_count);
+	//	read_sectors(fd, tp, 1, 1);
+	//	count = ntohl(tp->map_count);
 
 	/*JPB Handle multiple disks*/
 	for (dev_no = 0; dev_no < num_devs(); ++dev_no) {
 		u32 offset = dev_start_sector(dev_no);
-		
-		read_sectors(fd, tp, offset+1, 1);
-		
+		mfs_read_sectors(tp, offset+1, 1);
 		count = ntohl(tp->map_count);
+		fprintf( stderr, "dev: %d    offset: %d  count: %d\n", 
+			 dev_no, offset, count );
 
 		for (i=0;i<count;i++) {
-			read_sectors(fd, tp, offset+i+1, 1);
+			mfs_read_sectors(tp, offset+i+1, 1);
 			if (ntohs(tp->signature) != PARTITION_MAGIC) {
 				printf("wrong magic %x in partition %d\n",
 				       ntohs(tp->signature), i);
@@ -77,6 +76,9 @@ void partition_parse(int fd)
 			}
 
 		}
+		fprintf(stderr, "dev: %d  Found %d MFS partitions count: %d\n", 
+			dev_no, num_partitions,count);
+
 	}
 	fprintf(stderr, "Found %d MFS partitions\n", num_partitions);
 	use_ptable = 1;

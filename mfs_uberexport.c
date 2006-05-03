@@ -21,6 +21,7 @@ usage: %s [options] [<path|fsid> ...]\n\
    options:\n\
 	-a		Open output file for appending (requires [-o path])\n\
 	-c <count>      # of bytes to copy (defaults to allocated size of fsid)\n\
+	-d		Demux\'s audio on the fly instead of exporting TY mux\n\
 	-h		Display this usage info.\n\
 	-n <count>	# of sectors to use for buffering.  Defaults to 256\n\
 	-o <path|address:port>	Write output to the specified file or to a\n\
@@ -63,7 +64,8 @@ int main(int argc, char *argv[])
 	int rate = -1;
 	u32 nbufs = 256;	/* number of sectors to use for I/O buffering  */
 	int append = 0;
-	int tar=0;
+  int demux_audio = 0;
+  int tar=0;
 	int xml = 0;
 	int xmlonly = 0;
 	char *output = 0;
@@ -75,7 +77,7 @@ int main(int argc, char *argv[])
 	int i;
 
 	prog = argv[0];
-	while ((c = getopt(argc, argv, "ac:hn:o:p:r:R:s:txXv")) != -1 ){
+	while ((c = getopt(argc, argv, "ac:dhn:o:p:r:R:s:txXv")) != -1 ){
 		switch (c) {
 		case 'a':
 			append=1;
@@ -84,6 +86,10 @@ int main(int argc, char *argv[])
 		case 'c':
 			count = strtoll(optarg, NULL, 0);
 			break;			
+
+		case 'd':
+		  demux_audio = 1;
+		  break;
 
 		case 'h':
 			usage();
@@ -237,7 +243,7 @@ int main(int argc, char *argv[])
 				write(fd, &tar_header, sizeof(tar_header));
 			}
 
-			export_file(fsid,fd, start, count, rate, nbufs, verb);
+			export_file(fsid,fd, start, count, rate, nbufs, verb, demux_audio);
 		
 			if (tar)
 				/* Write out slack bytes */

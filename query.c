@@ -23,20 +23,21 @@ static void load_object(int fsid)
 	mfs_fsid_pread(fsid, loaded.buf, 0, loaded.size);
 }
 
+
 /* return the data portion of a part of an object */
 void *query_part(int fsid, int subobj, const char *name, int *len)
 {
 	void *ret = NULL;
 	void callback(int fsid, struct mfs_subobj_header *obj,
-		      struct mfs_attr_header *attr, void *data)
-		{
-			if (!attr) return;
-			if (!(obj->flags && subobj == -1) && !(obj->id == subobj)) return;
-			if (strcmp(schema_attrib(obj->obj_type, attr->attr), name)) return;
-			*len = attr->len;
-			ret = data;
-			// fprintf(stderr, "len=%d ret=%*.*s\n", *len, *len, *len, ret);
-		}
+			     struct mfs_attr_header *attr, void *data)
+	{
+		if (!attr) return;
+		if (!(obj->flags && subobj == -1) && !(obj->id == subobj)) return;
+		if (strcmp(schema_attrib(obj->obj_type, attr->attr), name)) return;
+		*len = attr->len;
+		ret = data;
+		// fprintf(stderr, "len=%d ret=%*.*s\n", *len, *len, *len, ret);
+	}
 
 	if (mfs_fsid_type(fsid) != MFS_TYPE_OBJ) {
 		fprintf(stderr,"%d is not an object\n", fsid);

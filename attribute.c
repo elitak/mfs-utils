@@ -28,9 +28,9 @@ get_attribute( void *buf, unsigned size, const char *target_subobj_name,
 	found = 0;
 
 	obj = (struct mfs_obj_header *) buf;
-	pend = (char *) buf + ntohl(obj->size);
+	pend = (unsigned char *) buf + ntohl(obj->size);
 	
-	for(p = (char *) buf + sizeof(struct mfs_obj_header); p < pend && ! found; p += ntohs(subobj->len)) {
+	for(p = (unsigned char *) buf + sizeof(struct mfs_obj_header); p < pend && ! found; p += ntohs(subobj->len)) {
 		subobj = (struct mfs_subobj_header *) p;
 		subobj_name = schema_type(ntohs(subobj->obj_type));
 		if (!subobj_name) /*JPB*/
@@ -65,8 +65,8 @@ get_attribute( void *buf, unsigned size, const char *target_subobj_name,
 				while (r < rend-4) {
 					assert(attribute->n < MFS_MAX_ARRAY_LEN);
 					attribute->u.string[attribute->n++] = 
-						strcpy(malloc(strlen(r) + 1), r);
-					r += strlen(r) + 1;
+					  strcpy(malloc(strlen((char*)r) + 1), (char*)r);
+					r += strlen((char*)r) + 1;
 				}
 				break;
 
@@ -74,7 +74,7 @@ get_attribute( void *buf, unsigned size, const char *target_subobj_name,
 			case TYPE_FILE:
 				while (r < rend-4) {
 					assert(attribute->n < MFS_MAX_ARRAY_LEN);
-					pint = (int *) r;
+					pint = (unsigned int *) r;
 					attribute->u.integer[attribute->n++] = ntohl(*pint);
 					r += sizeof(unsigned);
 				}

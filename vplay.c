@@ -139,7 +139,7 @@ static void usage(void)
 	while (mfs_fsid_pread(fsid, buf, ((u64)chunk+1)<<17, CHUNK_SIZE) ==
 	       CHUNK_SIZE && count) {
 		if (playback) {
-			parse_chunk(buf, video_fd, audio_fd);
+		  parse_chunk((unsigned char *)buf, video_fd, audio_fd);
 		} else if (write(vfd, buf, CHUNK_SIZE) != CHUNK_SIZE) {
 			printf("write failed\n");
 			exit(1);

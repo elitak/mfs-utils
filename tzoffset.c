@@ -21,7 +21,7 @@ int tzoffset()
 	int useDst = 0;
 	int fsid;
 
-	static void callback(int fsid, struct mfs_subobj_header *obj,
+	void callback(int fsid, struct mfs_subobj_header *obj,
 			     struct mfs_attr_header *attr, void *data)
 	{
 		if(obj && attr) {

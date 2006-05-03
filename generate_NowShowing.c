@@ -53,7 +53,7 @@ generate_NowShowing_internal(int fsid, void *bufMain, unsigned sizeMain,
 	char dow[4];
 	void *bufShowing=0, *bufProgram=0, *bufPart=0, *bufSeries=0, 
 		*bufStation=0;
-	int sizeShowing,  sizeProgram, sizePart, sizeSeries, sizeStation;
+	unsigned int sizeShowing,  sizeProgram, sizePart, sizeSeries, sizeStation;
 	time_t secs;
 	int has_title=0, has_etitle=0, has_partindex=0, has_partcount=0, has_tmsid=0,
 		has_callsign=0;

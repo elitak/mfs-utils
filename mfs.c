@@ -116,7 +116,7 @@ static void load_super(int fix)
 
 		if (*(u16 *)&super == 0x1492 || *(u16 *)&super == 0x9214) {
 			if (*(u16 *)&super == 0x1492) io_need_bswap(1);
-			partition_parse(fd);
+			partition_parse();
 			mfs_read_partial(&super, 0, sizeof(super));
 		}
 		close(fd);
@@ -161,8 +161,11 @@ static void load_super(int fix)
 		fprintf(stderr, "Warning: filesystem is inconsistent. Run fsfix and mfscheck ASAP\n");
 	}
 
+	// reread superblock with byteswapping, if needed
+	if (io_get_need_bswap())
+		mfs_read_partial(&super, 0, sizeof(super));
+
 	// fill out the partition table with the list from the superblock
-	
 	load_devs(super.devlist, xlist, nxlist, O_RDWR|O_LARGEFILE);
 
 	if (!fix) {
@@ -624,15 +627,15 @@ struct mfs_dirent *mfs_dir(int fsid, u32 *count)
 	dflags = ntohl(buf[0]) & 0xFFFF;
 	p = buf + 1;
 	while ((int)(p-buf) < dsize/4) {
-		u8 *s = ((char *)p)+4;
+		u8 *s = ((unsigned char *)p)+4;
 		p += s[0]/4;
 		n++;
 	}
 	ret = malloc((n+1)*sizeof(*ret));
 	p = buf + 1;
 	for (i=0;i<n;i++) {
-		u8 *s = ((char *)p)+4;
-		ret[i].name = strdup(s+2);
+		u8 *s = ((unsigned char *)p)+4;
+		ret[i].name = strdup((char *)s+2);
 		ret[i].type = s[1];
 		ret[i].fsid = ntohl(p[0]);
 		p += s[0]/4;
@@ -652,7 +655,7 @@ struct mfs_dirent *mfs_dir(int fsid, u32 *count)
 
 		for (i=0;i<n;i++) {
 			struct mfs_dirent *d2;
-			int n2;
+			unsigned int n2;
 			if (ret[i].type != MFS_TYPE_DIR) {
 				fprintf(stderr, "ERROR: non dir %d/%s in meta-dir %d!\n", 
 				       ret[i].type, ret[i].name, fsid);

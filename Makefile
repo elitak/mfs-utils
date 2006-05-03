@@ -65,9 +65,13 @@ TRIDGE_MFS_LIB=$(OBJDIR)/libtridgemfs.a
 endif
 endif
 
-COMMON = mfs.c object.c util.c bitmap.c io.c partition.c \
+# Add a define for the build date for usage message strings.
+CFLAGS += -DBUILD_DATE=\"`date +%Y/%m/%d`\"
+
+AUTO_PROTO_SRC = mfs.c object.c util.c bitmap.c io.c partition.c \
 	crc.c pri.c export.c schema.c query.c tzoffset.c tar.c \
 	credits.c read_xml.c generate_xml.c generate_NowShowing.c attribute.c log.c
+COMMON = $(AUTO_PROTO_SRC) ty_audio.c
 
 BINS = \
  mfs_info mfs_ls mfs_streams mfs_dumpobj mfs_dumpschema mfs_tzoffset \
@@ -98,8 +102,8 @@ tags:
 
 mfs.h: proto.h
 
-proto.h: $(COMMON)
-	cat $(COMMON) | awk -f mkproto.awk > proto.h
+proto.h: $(AUTO_PROTO_SRC)
+	cat $(AUTO_PROTO_SRC) | awk -f mkproto.awk > proto.h
 
 .PRECIOUS : $(OBJDIR)/%.o
 
@@ -122,7 +126,8 @@ $(BINDIR)/libtridgemfs.so.1.0: $(COMMON:%.c=$(OBJDIR)/%.o) $(SCHEMA:%.c=$(OBJDIR
 $(OBJDIR)/libtridgemfs.a: $(COMMON:%.c=$(OBJDIR)/%.o) $(SCHEMA:%.c=$(OBJDIR)/%.o)
 	$(AR) -rc  $@ $^ ; $(PREFIX)ranlib $@
 
+
 schema.c: preload_schema.h
 
-preload_schema.h: schema-7.1a-02.txt
+preload_schema.h: schema-7.2.2.txt
 	perl make-preload-schema.pl <$< >$@

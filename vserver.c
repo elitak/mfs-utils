@@ -252,7 +252,7 @@ static int open_socket_in(int type, int port, unsigned socket_addr)
 
 	while (1) {
 		struct sockaddr addr;
-		int in_addrlen = sizeof(addr);
+		unsigned in_addrlen = sizeof(addr);
 		int fd;
 
 		fd = accept(sock,&addr,&in_addrlen);

@@ -71,7 +71,7 @@ static void push_buffer(struct buffer *buffer, char *buf, int size)
 	int n;
 	fd_set fds;
 
-	static void push(struct buffer *obuffer) {
+	void push(struct buffer *obuffer) {
 		int n = obuffer->count - obuffer->delay;
 		if (shmem->bufsize - obuffer->read_ptr < n) {
 			n = shmem->bufsize - obuffer->read_ptr;
@@ -142,11 +142,11 @@ static void parse_chunk(unsigned char buf[CHUNK_SIZE], unsigned flags)
 		// unsigned subtype = p[2]&0xf;
 
 		if (type == 0xe0) {
-			push_buffer(&vbuffer, &buf[ofs], size);
+			push_buffer(&vbuffer, (char *)&buf[ofs], size);
 			flags &= ~FLAG_IFRAME;
 			ofs += size;
 		} else if (type == 0xc0) {
-			push_buffer(&abuffer, &buf[ofs], size);
+			push_buffer(&abuffer, (char *)&buf[ofs], size);
 			ofs += size;
 		}
 		p += 16;
@@ -163,7 +163,7 @@ static void vplayer_play(void)
 		
 		if (shmem->blknum[next] == -2) break;
 
-		parse_chunk(shmem->data[next], shmem->flags[next]);
+		parse_chunk( (unsigned char *)shmem->data[next], shmem->flags[next]);
 		shmem->blknum[next] = -1;
 		next = (next+1) % NUM_BLKS;
 	}

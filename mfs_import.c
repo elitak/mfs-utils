@@ -37,7 +37,7 @@ static inline ssize_t readall( int fd, void *buf, size_t count )
 		while (count > 0) {
 			ret = recv( fd, p, count, MSG_WAITALL );
 			if (ret <= 0) {
-				perror("recv error, falling back to read loop. ");
+			  //	perror("recv error, falling back to read loop. ");
 				use_recv=0;
 				break;
 			}
@@ -93,11 +93,13 @@ static int overwrite_stream(const u32 fsid, const int fd, u64 start,
         u64 ofs=0, size;
 	u64 total;
 	struct timespec delay;
+	int nb = (nbufs>0) ? nbufs : 256;
+	ssize_t ret = 0;
 
-        unsigned char *buf = alloca(nbufs*SECTOR_SIZE);
+        unsigned char *buf = alloca(nb*SECTOR_SIZE);
 	if (!buf) {
 		fprintf( stderr, "Couldn't allocate buffer: %d\n", 
-			 nbufs*SECTOR_SIZE );
+			 nb*SECTOR_SIZE );
 		exit(1);
 	}
 
@@ -128,6 +130,25 @@ static int overwrite_stream(const u32 fsid, const int fd, u64 start,
 		fprintf(stderr,
 			"importing fsid %d of size %llu starting at offset %llu for %lld bytes\n", 
 			fsid, size, start, count);
+	}
+
+	// Special case for short files: data is in the inode itself.
+	if(inode.num_runs == 0) {
+		if (count > nb*SECTOR_SIZE) {
+			fprintf( stderr, "inode data too big for buffer!?  Output truncated.\n" );
+			count = nb*SECTOR_SIZE;
+		}
+		
+		ret = readall(fd, buf, count );
+		if (ret <= 0) {
+			fprintf(stderr,"read failed.\n");
+			exit(1);
+		} else if (ret != count) {
+			fprintf(stderr,"short read: %d/%d\n", 
+				ret, (int)count);
+		}
+		mfs_fsid_pwrite( fsid, buf, start, count );
+		return count;
 	}
 
         for (run=0;count>0 && run<inode.num_runs;run++) {
@@ -168,7 +189,7 @@ static int overwrite_stream(const u32 fsid, const int fd, u64 start,
 					ofs += ret;
 				}
 			}
-                        rlen = MIN(nbufs,len);  //number of sectors to read this round
+                        rlen = MIN(nb,len);  //number of sectors to read this round
 			blen = MIN(rlen<<SECTOR_SHIFT,count);
                         ret  = readall(fd,buf,blen); //number of BYTES read
 			
@@ -248,9 +269,15 @@ usage: %s [options] <path|fsid> [<src>]\n\
 	u32 nbufs = 256;	/* number of sectors to use for I/O buffering  */
 	int verbose = 0;
 	int ret;
+	int i;
 
 	prog = argv[0];
 
+	fprintf( stderr, "starting mfs_import with args:\n");
+	for(i=0; i<argc; i++) {
+	  fprintf( stderr, "%s ", argv[i] );
+	}
+	fprintf( stderr, "\n");
 	while ((c = getopt(argc, argv, "hvs:c:r:n:p:")) != -1 ){
 		switch (c) {
 		case 'h':

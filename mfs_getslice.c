@@ -29,7 +29,7 @@ static void dump_video(int fsid)
 		if ( (fd = open(dest, O_WRONLY|O_CREAT|O_TRUNC|O_LARGEFILE, 0644)) <0)
 			perror(dest);
 		else 
-			export_file(vid, fd , 0, 0, -1, 256, 0 );
+			export_file(vid, fd , 0, 0, -1, 256, 0, 0 );
 		close(fd);
 	}
 }

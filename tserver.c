@@ -21,19 +21,25 @@
 //
 // usage - Print out the usage as seperate lines. Save the deprecation warnings.
 //
-void usage(void)
+void usage(const char*progname)
 {
-	printf("tserver_mfs [options]\n");
-	printf("Version: 1.3-20050428\n");
-	printf("options:\n");
-	printf("    -n  No Priority Change (Stay at higher priority...)\n");
-        printf("    -d <path> DeleteShowing tivosh script to use instead of the internal script\n");
-        printf("    -s <path> NowShowing tivosh script to use instead of the internal code.\n"
-	       "              Also used for DeleteScript, unless overriden with -d\n");
-	printf("    -l  Send messages to syslog\n");
-	printf("    -L  Send all messages to syslog\n");
-	printf("    -i  inetd mode. Use this in inetd.conf.\n");
-	printf("    -h  help\n");
+	fprintf(stderr, "\n\
+usage: %s [options]\n\
+Version: mfs-utils %s\n\
+options:\n\
+   -d <path> DeleteShowing tivosh script to use instead of the internal script\n\
+   -h  help\n\
+   -i  inetd mode. Use this in inetd.conf.\n\
+   -l  Send messages to syslog\n\
+   -L  Send all messages to syslog\n\
+   -n  No Priority Change (Stay at higher priority...)\n\
+   -r <ms>  Rate control (throttle)\n\
+              -'ve  : no delay (default)\n\
+              0     : sched_yield() between chunks\n\
+              +'ve  : # of ms to delay between chunks\n\
+   -s <path> NowShowing tivosh script to use instead of the internal code.\n\
+             Also used for DeleteScript, unless overriden with -d\n\
+", progname, BUILD_DATE);
 	credits();
 	exit(1);
 }
@@ -264,7 +270,7 @@ main(int argc, char *argv[])
 {
 	char			buf[CMD_SIZE];			// Command we read from the socket.
 	int			ns = -1;			// New socket descriptor
-	int			len;
+	unsigned int		len;
 	
 	struct sockaddr		client_sa;			// Data structure for the address of the client entity
 	struct sockaddr_in	sa_in;				// Structure for address of the server entity.
@@ -272,19 +278,21 @@ main(int argc, char *argv[])
 	int			doPri = 1;			// By default change the priority.
 	int			reuseAddr;
 	int                     c, fd, inetd = 0;
+	int                    delayms=-1;
+	const char *           progname = argv[0];
 
-	while ((c = getopt(argc, argv, "nd:s:lLih?")) != -1)
+	while ((c = getopt(argc, argv, "nd:s:r:lLih?")) != -1)
 	{
 		switch (c)
 		{
-			case 'n':	doPri=0;	break;	// Don't change priority.
-
+		        case 'n':	doPri=0;	 break;	// Don't change priority.
  		        case 'd':       script_DeleteShowing=optarg;  break;
  		        case 's':       script_NowShowing=optarg;  break;
 			case 'l':	setup_syslog(1); break;
 			case 'L':	setup_syslog(2); break;
-			case 'i':	inetd=1;	break;
-			default:	usage();	exit(1);
+			case 'i':	inetd=1;	 break;
+ 		        case 'r':       delayms=optarg;  break;
+			default:	usage(progname); exit(1);
 		}
 	}
 	
@@ -292,14 +300,14 @@ main(int argc, char *argv[])
 
 	if (argc != 0)
 	{
-		usage();
+		usage(progname);
 	}
 
 	if (inetd) {
 		// If started by inetd, stdin+stdout+stderr are all connected
 		// to the socket. Here we keep just stdin (fd=0).
 		int logfd;
-		logfd= open("/dev/null", O_WRONLY|O_CREAT|O_TRUNC, 0644);
+		logfd= open("/dev/console", O_WRONLY|O_CREAT|O_TRUNC, 0644);
 		if (logfd==-1) exit(2);
 		dup2(logfd,1);
 		close(logfd);
@@ -427,7 +435,7 @@ main(int argc, char *argv[])
 				FSIDs[pos++] = myAtoi(token);
 
 				fsid = mfs_resolve(token);
-				if (export_file(fsid,ns, 0, 0, -1, 256, 0) <0)
+				if (export_file(fsid,ns, 0, 0, delayms, 256, 0, 0) <0)
 					break; // Stop as soon as we have a problem.
 				token = strtok(NULL, seps);
 			}
@@ -543,7 +551,7 @@ main(int argc, char *argv[])
 					printf("-> '%s'\n", token);
 
 					fsid = mfs_resolve(token);
-					if (export_file(fsid,ns2, 0, 0, -1, 256, 0) <0)
+					if (export_file(fsid,ns2, 0, 0, delayms, 256, 0, 0) <0)
 						break; // Stop as soon as we have a problem.
 					token = strtok(NULL, seps);
 				}
