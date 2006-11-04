@@ -63,7 +63,8 @@ void partition_parse()
 		for (i=0;i<count;i++) {
 			mfs_read_sectors(tp, offset+i+1, 1);
 			if (ntohs(tp->signature) != PARTITION_MAGIC) {
-				printf("wrong magic %x in partition %d\n",
+				fprintf(stderr, 
+				       "wrong magic %x in partition %d\n",
 				       ntohs(tp->signature), i);
 				exit(1);
 			}
@@ -89,16 +90,18 @@ u32 partition_remap(u32 sec)
 {
 	int i;
 	u32 start=0;
+	u32 len;
 
 	if (!use_ptable) return sec;
 
 	for (i=0; i<num_partitions; i++) {
-		if (sec < start + pmaps[i].length) {
+		len = (pmaps[i].length & ~(MFS_BLOCK_ROUND-1));
+		if (sec < start + len) {
 			// fprintf(stderr, "remapped %d to %d\n",
 			//       sec, pmaps[i].start + (sec - start));
 			return pmaps[i].start + (sec - start);
 		}
-		start += (pmaps[i].length & ~(MFS_BLOCK_ROUND-1));
+		start += len;
 	}
 	if (i == num_partitions) {
 		fprintf(stderr,"Failed to partition map sector %d\n", sec);

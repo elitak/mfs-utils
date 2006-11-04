@@ -30,9 +30,13 @@ EXTRABINS = vplayer sd-h400_unlock vsplit
 ifeq ($(ARCH),Darwin-Power-Macintosh)
 CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
 else
+ifeq ($(ARCH),Darwin-i386\)
+CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
+else
 CFLAGS += -DNEED_ALLOCA_H
 ifeq ($(findstring CYGWIN,$(ARCH)),CYGWIN)
 CFLAGS += -DNEED_STRNDUPA -DNEED_STRDUPA
+endif
 endif
 endif
 endif
@@ -129,5 +133,5 @@ $(OBJDIR)/libtridgemfs.a: $(COMMON:%.c=$(OBJDIR)/%.o) $(SCHEMA:%.c=$(OBJDIR)/%.o
 
 schema.c: preload_schema.h
 
-preload_schema.h: schema-7.2.2.txt
+preload_schema.h: schema-7.3.1.txt
 	perl make-preload-schema.pl <$< >$@

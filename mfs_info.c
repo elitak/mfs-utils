@@ -108,38 +108,41 @@ static void hash_table_free(hash_table *h) {
 }
 
 
+static queue *qptr;
+static hash_table *hptr;
+void obj_callback(int fsid, struct mfs_subobj_header *obj,
+		  struct mfs_attr_header *attr, void *data)
+{
+	int i;
+	char *p = data;
+	struct mfs_obj_attr *objattr;
+	
+	if (!attr) {
+		return;
+	}
+
+	switch (attr->eltype>>6) {
+	case TYPE_FILE:
+		// Save on queue of objects to process later
+		for (i=0;i<(attr->len-4)/4;i++)
+			queue_add(qptr, ntohl(*(int *)&p[i*4]));
+		break;
+
+	case TYPE_OBJECT:
+		objattr = (struct mfs_obj_attr *)p;
+		for (i=0;i<(attr->len-4)/sizeof(*objattr);i++) {
+			int  id = ntohl(objattr->fsid);
+			if (id != fsid)
+				queue_add(qptr, id);
+			objattr++;
+		}
+		break;
+	}
+}
+
 typedef void (*stream_fn)(int fsid);
 static void traverse(queue *q, hash_table *h, int fsid, stream_fn sfn ) {
 
-	void obj_callback(int fsid, struct mfs_subobj_header *obj,
-			  struct mfs_attr_header *attr, void *data)
-	{
-		int i;
-		char *p = data;
-		struct mfs_obj_attr *objattr;
-	
-		if (!attr) {
-			return;
-		}
-
-		switch (attr->eltype>>6) {
-		case TYPE_FILE:
-			// Save on queue of objects to process later
-			for (i=0;i<(attr->len-4)/4;i++)
-				queue_add(q, ntohl(*(int *)&p[i*4]));
-			break;
-
-		case TYPE_OBJECT:
-			objattr = (struct mfs_obj_attr *)p;
-			for (i=0;i<(attr->len-4)/sizeof(*objattr);i++) {
-				int  id = ntohl(objattr->fsid);
-				if (id != fsid)
-					queue_add(q, id);
-				objattr++;
-			}
-			break;
-		}
-	}
 
 	if (hash_table_search(h,fsid)) return;
 	fprintf( stderr, ".");
@@ -170,6 +173,7 @@ static void traverse(queue *q, hash_table *h, int fsid, stream_fn sfn ) {
 		queue q1;
 
 		mfs_fsid_pread(fsid, buf, 0, size);
+		qptr = q;
 		parse_object(fsid, buf, obj_callback);
 		q1 = queue_copy(q);
 		q->nq = 0;
@@ -218,6 +222,15 @@ static void stream_scan1()
 	fprintf( stderr, "max stream size under /Resource: %uMB\n", (unsigned int)(mx_sz/(1024*1024)));
 }
 
+void check_inode_fn(struct mfs_inode *inode, void *data)
+{
+	if (inode->type != MFS_TYPE_STREAM) return;
+	if (hash_table_search(hptr,inode->id)) return;
+	fprintf( stderr, ".");
+	queue_add(qptr, inode->id);
+}
+
+
 static void stream_scan2()
 {
 	const char *path = "/Recording";
@@ -227,19 +240,13 @@ static void stream_scan2()
 	queue q, q1;
 	hash_table h;
 
-	void check_inode_fn(struct mfs_inode *inode) {
-		if (inode->type != MFS_TYPE_STREAM) return;
-		if (hash_table_search(&h,inode->id)) return;
-		fprintf( stderr, ".");
-		queue_add(&q, inode->id);
-	}
-
 
 	// Recursively traverse path and record all fsid's referenced
 	// there in a hash table.
 	fprintf( stderr, "traversing %s... ", path );
 	q1 = queue_new();
 	h = hash_table_new();
+	hptr = &h;
 	traverse(&q1, &h, mfs_resolve(path),0);
 	queue_free(&q1);
 	fprintf( stderr, "\n" );
@@ -248,7 +255,8 @@ static void stream_scan2()
 	// seen under path
 	fprintf( stderr, "scanning inodes... ");
 	q = queue_new();
-	mfs_all_inodes( check_inode_fn );
+	qptr = &q;
+	mfs_all_inodes( check_inode_fn, (void *)0 );
 	fprintf( stderr, "\n" );
 	hash_table_free(&h);
 
@@ -285,11 +293,11 @@ static void stream_scan2()
 
 int main(int argc, char *argv[])
 {
-	int c;
 	int fix=0;
+	int c;
 	int scan = 0;
 
-	while ((c = getopt(argc, argv, "hfs::")) != -1 ){
+	while ((c = getopt(argc, argv, "hfsT::")) != -1 ){
 		switch (c) {
 		case 'h':
 			usage();
@@ -325,6 +333,5 @@ int main(int argc, char *argv[])
 		printf("\n");
 		stream_scan2();
 	}
-		
 	return 0;
 }

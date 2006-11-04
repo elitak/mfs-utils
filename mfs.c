@@ -392,12 +392,13 @@ void mfs_fsid_info(int fsid)
 	u32 hash = fsid_hash(fsid, zones[0]->zone_size/2);
 
 	mfs_load_inode(fsid, &inode);
-	fprintf(stderr, "id=%d type=%d/%s hash=%x sec=%d typexx=%d units=%d size=%d runs=%d\n", 
+	fprintf(stderr, "id=%d type=%d/%s hash=%x sec=%d typexx=%d units=%d size=%d used_units=%d used_size=%d runs=%d\n", 
 	       inode.id, inode.type, 
 	       mfs_type_string(inode.type),
 	       hash, zones[0]->zone_start+hash*2,
 	       inode.typexx,
-	       inode.units, inode.size, inode.num_runs);
+	       inode.units, inode.size, inode.used_units, inode.used_size, 
+	       inode.num_runs);
 	for (i=0; i<inode.num_runs; i++) {
 		fprintf(stderr, "run 0x%08x:0x%x\n", 
 		       inode.u.runs[i].start,
@@ -756,7 +757,7 @@ u32 mfs_resolve(const char *pathin)
 
 
 /* loop over all inodes calling fn on each one */
-void mfs_all_inodes(void (*fn)(struct mfs_inode *))
+void mfs_all_inodes(void (*fn)(struct mfs_inode *,void *), void *data)
 {
 	int i, z;
 	u32 start_hash=0;
@@ -778,7 +779,7 @@ void mfs_all_inodes(void (*fn)(struct mfs_inode *))
 			  //					       inode.id, super.next_fsid);
 			  //					exit(1);
 			  //				}
-				fn(&inode);
+				fn(&inode,data);
 			}
 		}
 		start_hash += zones[z]->zone_size/2;
@@ -786,46 +787,56 @@ void mfs_all_inodes(void (*fn)(struct mfs_inode *))
 }
 
 
+struct bitmap_fn_data {
+	int zone;
+	u64 limit;
+	struct bitmap *bm;
+};
+
+void bitmap_fn(struct mfs_inode *inode, void *data) 
+{
+	int i;
+	struct bitmap_fn_data *bm_data = (struct bitmap_fn_data *)data;
+	struct mfs_zone_map *zone = zones[bm_data->zone];
+
+	fprintf(stderr, "inode %d runs=%d\n", inode->id, inode->num_runs);
+	if (bm_data->limit && mfs_fsid_size(inode->id) > bm_data->limit) {
+		fprintf(stderr, "skipping inode %d of size=%lld\n", 
+			inode->id, mfs_fsid_size(inode->id));
+		return;
+	}
+	//if (bitmap_excluded(inode->id)) return;
+	for (i=0;i<inode->num_runs;i++) {
+		u32 start, len;
+		start = inode->u.runs[i].start;
+		len = inode->u.runs[i].len;
+		if (start < zone->zone_start ||
+		    start >= zone->zone_start+ zone->zone_size) {
+			continue;
+		}
+		if (len % zone->per_chunk) {
+			fprintf(stderr, "Not a multiple of per-chunk? fsid=%d\n", inode->id);
+			exit(1);
+		}
+		bitmap_set(bm_data->bm, 
+			   (start-zone->zone_start)/
+			   zone->per_chunk,
+			   len/zone->per_chunk);
+	}
+}
+
 struct bitmap *mfs_zone_bitmap(int zone, u64 limit)
 {
-	struct bitmap *bm;
 	int num_blocks;
-
-	void bitmap_fn(struct mfs_inode *inode) {
-		int i;
-		fprintf(stderr, "inode %d runs=%d\n", inode->id, inode->num_runs);
-		if (limit && mfs_fsid_size(inode->id) > limit) {
-			fprintf(stderr, "skipping inode %d of size=%lld\n", 
-			       inode->id, mfs_fsid_size(inode->id));
-			return;
-		}
-		//if (bitmap_excluded(inode->id)) return;
-		for (i=0;i<inode->num_runs;i++) {
-			u32 start, len;
-			start = inode->u.runs[i].start;
-			len = inode->u.runs[i].len;
-			if (start < zones[zone]->zone_start ||
-			    start >= zones[zone]->zone_start+
-			    zones[zone]->zone_size) {
-				continue;
-			}
-			if (len % zones[zone]->per_chunk) {
-				fprintf(stderr, "Not a multiple of per-chunk? fsid=%d\n", inode->id);
-				exit(1);
-			}
-			bitmap_set(bm, 
-				   (start-zones[zone]->zone_start)/
-				   zones[zone]->per_chunk,
-				   len/zones[zone]->per_chunk);
-		}
-	}
+	struct bitmap_fn_data bm_data;
 
 	num_blocks = zones[zone]->zone_size / zones[zone]->per_chunk;
-	bm = bitmap_allocate(num_blocks);
-	
-	mfs_all_inodes(bitmap_fn);
+	bm_data.zone = zone;
+	bm_data.limit = limit;
+	bm_data.bm = bitmap_allocate(num_blocks);
+	mfs_all_inodes(bitmap_fn, &bm_data);
 
-	return bm;
+	return bm_data.bm;
 }
 
 
@@ -867,4 +878,3 @@ u32 mfs_zone_size(int zone)
 {
 	return zones[zone]->zone_size;
 }
-

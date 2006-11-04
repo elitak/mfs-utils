@@ -291,7 +291,7 @@ main(int argc, char *argv[])
 			case 'l':	setup_syslog(1); break;
 			case 'L':	setup_syslog(2); break;
 			case 'i':	inetd=1;	 break;
- 		        case 'r':       delayms=optarg;  break;
+		        case 'r':       delayms=strtoll(optarg,NULL,0);  break;
 			default:	usage(progname); exit(1);
 		}
 	}

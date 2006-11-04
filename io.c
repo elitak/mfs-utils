@@ -22,9 +22,6 @@
 #else
 #ifdef __MACH__
 #include <sys/disk.h>
-#ifndef BLKGETSIZE
-#define BLKGETSIZE DKIOCGETBLOCKCOUNT32
-#endif
 #endif
 #endif
 #endif
@@ -350,6 +347,30 @@ u32	dev_start_sector(u32 dev_no)
 }
 
 
+static u32 get_blockcount(int fd )
+{
+	u32 retval;
+
+#ifdef BLKGETSIZE
+	ioctl(fd, BLKGETSIZE, &retval);
+#else
+#if DKIOCGETBLOCKCOUNT32
+	ioctl(devs[i].fd, DKIOCGETBLOCKCOUNT32, &retval);
+#else
+#if DKIOCGETBLOCKCOUNT
+	{
+		long long nsectors;
+		ioctl(devs[i].fd, DKIOCGETBLOCKCOUNT, &nsectors );
+		retval = (u32) nsectors;
+	}
+#else
+	error("no ioctl to get block size");
+#endif
+#endif
+#endif
+	return retval;
+}
+
 /* initialise the devices list from the superblock devlist */
 void load_devs(char *devlist, char *xlist[], int nxlist, int mode)
 {
@@ -420,7 +441,7 @@ void load_devs(char *devlist, char *xlist[], int nxlist, int mode)
 		}
 		devs[i].sectors = ll_seek(devs[i].fd, 0, SEEK_END) >> SECTOR_SHIFT;
 		if (devs[i].sectors == 0) {
-			ioctl(devs[i].fd, BLKGETSIZE, &devs[i].sectors);
+			devs[i].sectors = get_blockcount( devs[i].fd );
 		}
 		devs[i].sectors &= ~(MFS_BLOCK_ROUND-1);
 		total_size += devs[i].sectors;

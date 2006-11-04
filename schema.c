@@ -151,7 +151,7 @@ void dump_schema(FILE *f)
 		if (!types[i]) continue;
 		for (j=1; j<attrs[i].n; j++) {
 			if (attrs[i].a[j].name) {
-				fprintf(stderr, "%d %s %d %s %s\n",
+				fprintf(f, "%d %s %d %s %s\n",
 				       i, types[i], j, attrs[i].a[j].name,
 				       object_typestr(attrs[i].a[j].objtype));
 			}
