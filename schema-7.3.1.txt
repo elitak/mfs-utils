@@ -152,6 +152,7 @@
 5 Station 33 AolDescription string optional {} base
 5 Station 34 AolStationType string optional {} base
 5 Station 35 Uri string multi {} base
+5 Station 36 AgeHint int optional {} base
 6 StationDay 1 Version int optional {} base
 6 StationDay 2 Expiration int optional {} base
 6 StationDay 3 Path string optional {} base
@@ -378,6 +379,8 @@
 14 Recording 73 Drm object optional {} base
 14 Recording 74 ClientID string optional {} base
 14 Recording 75 Dict int multi {} base
+14 Recording 76 CcHashPatternFile file optional {} base
+14 Recording 77 ProgramSourceKidZoneStatus int multi {} base
 15 Bookmark 1 Version int optional {} base
 15 Bookmark 2 Expiration int optional {} base
 15 Bookmark 3 Path string optional {} base
@@ -621,6 +624,15 @@
 24 Channel 27 DisplayNumber int optional {} base
 24 Channel 28 NetworkData object multi {} base
 24 Channel 29 LocalChannel int optional {} base
+24 Channel 30 TransportStreamId int optional {} base
+24 Channel 31 ProgramNumber int optional {} base
+24 Channel 32 FrequencyIndex int optional {} base
+24 Channel 33 Hidden int optional {} base
+24 Channel 34 Video int optional {} base
+24 Channel 35 Audio int optional {} base
+24 Channel 36 Data int optional {} base
+24 Channel 37 AllowedToTune int optional {} base
+24 Channel 38 Kidzone int optional {} base
 25 ResourceGroup 1 Version int optional {} base
 25 ResourceGroup 2 Expiration int optional {} base
 25 ResourceGroup 3 Path string optional {} base
@@ -864,6 +876,7 @@
 39 RecordingPart 20 CommercialSkipOffset int multi {} base
 39 RecordingPart 21 CommercialSkipCount int optional {} base
 39 RecordingPart 22 CommercialSkipRange int multi {} base
+39 RecordingPart 23 Drm object optional {} base
 40 ObjectType 1 Version int optional {} base
 40 ObjectType 2 Expiration int optional {} base
 40 ObjectType 3 Path string optional {} base
@@ -2700,6 +2713,9 @@
 133 AvConfig 36 SupportedDisplayFormats int optional {} base
 133 AvConfig 37 PartialRecordingPolicy int optional {} base
 133 AvConfig 38 WideScreenFormat int optional {} base
+133 AvConfig 39 DisplayFormatMode int optional {} base
+133 AvConfig 40 HybridDisplayFormats int optional {} base
+133 AvConfig 41 ExternalTunerCount int optional {} base
 134 GeneralConfig 1 Version int optional {} base
 134 GeneralConfig 2 Expiration int optional {} base
 134 GeneralConfig 3 Path string optional {} base
@@ -2725,6 +2741,7 @@
 134 GeneralConfig 26 FrontPanelBacklightLevel int optional {} base
 134 GeneralConfig 27 Configured int multi {} base
 134 GeneralConfig 28 LocalHmeEnabled int optional {} base
+134 GeneralConfig 29 KidZoneEnabled int optional {} base
 135 PhoneConfig 1 Version int optional {} base
 135 PhoneConfig 2 Expiration int optional {} base
 135 PhoneConfig 3 Path string optional {} base
