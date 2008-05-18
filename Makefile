@@ -26,7 +26,7 @@ CFLAGS += -mips2 -DTIVO -DTIVO_S2
 #CCLDFLAGS += -static
 else
 # host ARCH, not cross compiling
-EXTRABINS = vplayer sd-h400_unlock vsplit
+EXTRABINS = vplayer vsplit
 ifeq ($(ARCH),Darwin-Power-Macintosh)
 CFLAGS += -DNEED_STRNDUP -DNEED_STRNDUPA -DNEED_STRDUPA
 else
@@ -81,10 +81,10 @@ BINS = \
  mfs_info mfs_ls mfs_streams mfs_dumpobj mfs_dumpschema mfs_tzoffset \
  mfs_import mfs_uberexport mfs_burstcmds                \
  mfs_export mfs_stream mfs_tarstream mfs_tmfstream      \
- tserver vserver NowShowing ciphercheck                 \
+ tserver vserver NowShowing ciphercheck    \
  vplay                                                  \
  mfs_dump mfs_poke                                      \
- mfs_bitmap mfs_purge mfs_getslice mfs_findzero
+ mfs_bitmap mfs_purge mfs_getslice mfs_findzero 
 
 OBJDIR = obj.$(ARCH)
 BINDIR = bin.$(ARCH)
@@ -133,5 +133,5 @@ $(OBJDIR)/libtridgemfs.a: $(COMMON:%.c=$(OBJDIR)/%.o) $(SCHEMA:%.c=$(OBJDIR)/%.o
 
 schema.c: preload_schema.h
 
-preload_schema.h: schema-7.3.1.txt
+preload_schema.h: schema-merged-9.3.txt
 	perl make-preload-schema.pl <$< >$@
