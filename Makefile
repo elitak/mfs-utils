@@ -84,7 +84,7 @@ BINS = \
  tserver vserver NowShowing ciphercheck    \
  vplay                                                  \
  mfs_dump mfs_poke                                      \
- mfs_bitmap mfs_purge mfs_getslice mfs_findzero  mfs_repair_loopsets \
+ mfs_bitmap mfs_purge mfs_getslice mfs_findzero
 
 OBJDIR = obj.$(ARCH)
 BINDIR = bin.$(ARCH)
