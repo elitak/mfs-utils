@@ -136,17 +136,25 @@ static void load_super(int fix)
 		io_need_bswap(1);
 		break;
 	case 0x37353033:
+	case 0x37353134:
+	case 0x37353136:
 		fs_inconsistent = 1;
 		break;
-	case 0x35373339:
+	case 0x35373330:
+	case 0x35373431:
+	case 0x35373631:
 		fs_inconsistent = 1;
 		io_need_bswap(1);
 		break;
 	case 0x33303537:
+	case 0x34313537:
+	case 0x36313537:
 		fs_inconsistent = 1;
 		little_endian = 1;
 		break;
 	case 0x30333735:
+	case 0x31343735:
+	case 0x31363735:
 		fs_inconsistent = 1;
 		little_endian = 1;
 		io_need_bswap(1);
@@ -176,7 +184,11 @@ static void load_super(int fix)
 	}
 	byte_swap(&super, "i9 b128 i17");
 
-	if ((super.magic != 0xabbafeed) && (super.magic != 0x37353033)) {
+	if ((super.magic != 0xabbafeed) && 
+	    (super.magic != 0x37353033) &&
+	    (super.magic != 0x37353134) &&
+	    (super.magic != 0x37353136)
+	    ) {
 		fprintf(stderr,"Failed to byte swap correctly\n");
 		exit(1);
 	}
@@ -710,7 +722,7 @@ char *mfs_type_string(int type)
 /* resolve a path to a fsid */
 u32 mfs_resolve(const char *pathin)
 {
-	char *path, *tok, *r;
+	char *path, *tok, *r=NULL;
 	u32 fsid;
 	struct mfs_dirent *dir = NULL;
 

@@ -57,8 +57,8 @@ void partition_parse()
 		u32 offset = dev_start_sector(dev_no);
 		mfs_read_sectors(tp, offset+1, 1);
 		count = ntohl(tp->map_count);
-		fprintf( stderr, "dev: %d    offset: %d  count: %d\n", 
-			 dev_no, offset, count );
+		//		fprintf( stderr, "dev: %d    offset: %d  count: %d\n", 
+		//			 dev_no, offset, count );
 
 		for (i=0;i<count;i++) {
 			mfs_read_sectors(tp, offset+i+1, 1);
@@ -77,11 +77,11 @@ void partition_parse()
 			}
 
 		}
-		fprintf(stderr, "dev: %d  Found %d MFS partitions count: %d\n", 
-			dev_no, num_partitions,count);
+		//		fprintf(stderr, "dev: %d  Found %d MFS partitions count: %d\n", 
+		//			dev_no, num_partitions,count);
 
 	}
-	fprintf(stderr, "Found %d MFS partitions\n", num_partitions);
+	//	fprintf(stderr, "Found %d MFS partitions\n", num_partitions);
 	use_ptable = 1;
 }
 
